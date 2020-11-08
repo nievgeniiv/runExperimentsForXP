@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AF0D42AF-B44C-491B-B71E-7D70B70566AB}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>experiments</RootNamespace>
+    <AssemblyName>experiments</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.1</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\Common.cs" />
+    <Compile Include="Common\Settings1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Settings11.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings1.settings</DependentUpon>
+    </Compile>
+    <Compile Include="InterfacesViews\IViewAboutForm.cs" />
+    <Compile Include="InterfacesViews\IViewCameraSettings.cs" />
+    <Compile Include="InterfacesViews\IViewCommonSettings.cs" />
+    <Compile Include="InterfacesViews\IViewMainForm.cs" />
+    <Compile Include="InterfacesViews\IViewLaserSettings.cs" />
+    <Compile Include="InterfacesViews\IViewStepMotorSettings.cs" />
+    <Compile Include="Models\ModelBMP.cs" />
+    <Compile Include="Models\ModelDirectory.cs" />
+    <Compile Include="Models\ModelSettings.cs" />
+    <Compile Include="Presents\PresentAboutProgram.cs" />
+    <Compile Include="Presents\PresentCameraSettings.cs" />
+    <Compile Include="Presents\PresentCommonSettings.cs" />
+    <Compile Include="Presents\PresentMainForm.cs" />
+    <Compile Include="Presents\PresentLaserSettings.cs" />
+    <Compile Include="Presents\PresentStepMotorSettings.cs" />
+    <Compile Include="Services\ServiceCCDCamera.cs" />
+    <Compile Include="Services\ServiceDigitizationBMP.cs" />
+    <Compile Include="Services\ServiceStepMotor.cs" />
+    <Compile Include="Views\ViewAboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ViewAboutForm.Designer.cs">
+      <DependentUpon>ViewAboutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ViewCameraSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ViewCameraSettings.Designer.cs">
+      <DependentUpon>ViewCameraSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ViewCommonSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ViewCommonSettings.Designer.cs">
+      <DependentUpon>ViewCommonSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ViewLaserSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ViewLaserSettings.Designer.cs">
+      <DependentUpon>ViewLaserSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ViewMainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ViewMainForm.Designer.cs">
+      <DependentUpon>ViewMainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\ViewStepMotorSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ViewStepMotorSettings.Designer.cs">
+      <DependentUpon>ViewStepMotorSettings.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Views\ViewAboutForm.resx">
+      <DependentUpon>ViewAboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ViewCameraSettings.resx">
+      <DependentUpon>ViewCameraSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ViewCommonSettings.resx">
+      <DependentUpon>ViewCommonSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ViewLaserSettings.resx">
+      <DependentUpon>ViewLaserSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ViewMainForm.resx">
+      <DependentUpon>ViewMainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Views\ViewStepMotorSettings.resx">
+      <DependentUpon>ViewStepMotorSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Common\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Common\Settings1.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings11.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="lib" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

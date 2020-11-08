@@ -1,0 +1,27 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="experiments.Common" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Version" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0,2</Value>
+    </Setting>
+    <Setting Name="NameProgram" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Experiment</Value>
+    </Setting>
+    <Setting Name="AboutProgram" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Данная программа написана для проведения экспериментов по многократному рассеянию для прибора, который разрабатывается на кафедре</Value>
+    </Setting>
+    <Setting Name="PathSaveResult" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="CountPhoto" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="PowerLaser" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="SpeedConnectComPort" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">9600</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

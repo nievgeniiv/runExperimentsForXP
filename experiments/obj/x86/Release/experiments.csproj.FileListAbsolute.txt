@@ -1,0 +1,15 @@
+E:\Soft\C#\experimentsForXP\experiments\bin\x86\Release\experiments.exe.config
+E:\Soft\C#\experimentsForXP\experiments\bin\x86\Release\experiments.exe
+E:\Soft\C#\experimentsForXP\experiments\bin\x86\Release\experiments.pdb
+E:\Soft\C#\experimentsForXP\experiments\obj\x86\Release\experiments.csprojAssemblyReference.cache
+E:\Soft\C#\experimentsForXP\experiments\obj\x86\Release\experiments.Views.ViewAboutForm.resources
+E:\Soft\C#\experimentsForXP\experiments\obj\x86\Release\experiments.Views.ViewCameraSettings.resources
+E:\Soft\C#\experimentsForXP\experiments\obj\x86\Release\experiments.Views.ViewCommonSettings.resources
+E:\Soft\C#\experimentsForXP\experiments\obj\x86\Release\experiments.Views.ViewLaserSettings.resources
+E:\Soft\C#\experimentsForXP\experiments\obj\x86\Release\experiments.ViewMainForm.resources
+E:\Soft\C#\experimentsForXP\experiments\obj\x86\Release\experiments.Properties.Resources.resources
+E:\Soft\C#\experimentsForXP\experiments\obj\x86\Release\experiments.Views.ViewStepMotorSettings.resources
+E:\Soft\C#\experimentsForXP\experiments\obj\x86\Release\experiments.csproj.GenerateResource.cache
+E:\Soft\C#\experimentsForXP\experiments\obj\x86\Release\experiments.csproj.CoreCompileInputs.cache
+E:\Soft\C#\experimentsForXP\experiments\obj\x86\Release\experiments.exe
+E:\Soft\C#\experimentsForXP\experiments\obj\x86\Release\experiments.pdb
