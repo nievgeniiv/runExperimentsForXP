@@ -87,23 +87,22 @@ namespace experiments.Services
         {
             
             StreamWriter sw = new StreamWriter(filePath + ".dat");
-            object[] objects = {};
-            int j = 0;
-            foreach (var pxl in _checkPxl)
-            {
-                StreamWriter swCheckPxl = new StreamWriter(_pathDigitization + _currentDirectory + "ChekcPxl(" + pxl.ToString() + ").dat", true);
-                objects[j] = swCheckPxl;
-            }
-            
+
             int i = 0;
             int k = 0;
             foreach (var height in brightnessArray)
             {
                 while (i < height.Length - 1)
                 {
-                    if (_checkPxl.Contains(i) && _checkPxl.Contains(k))
+                   // if (_checkPxl.Contains(i) && _checkPxl.Contains(k) && i == k)
+                    if (_checkPxl.Contains(k) && i == k)
                     {
+                        StreamWriter swCheckPxl =
+                            new StreamWriter(_pathDigitization + "ChekcPxl(" + i.ToString() + ").dat",
+                                true);
+                        swCheckPxl.Write(_currentDirectory.TrimEnd('m', 'k', 's') + "   ");
                         swCheckPxl.WriteLine(height[i]);
+                        swCheckPxl.Close();
                     }
                     sw.Write(height[i] + "   ");
                     i++;
@@ -118,13 +117,8 @@ namespace experiments.Services
                 k++;
             }
             sw.Close();
-            swCheckPxl.Close();
-            //StreamWriter swPower = new StreamWriter(filePath + "Power.dat");
-            //string currnetPath = _pathDigitization + _currentDirectory + "Power.dat";
-            //MessageBox.Show(currnetPath);
             StreamWriter swPower = new StreamWriter(_pathDigitization + _currentDirectory + "Power.dat", true);
             swPower.WriteLine(power);
-            //MessageBox.Show("ok");
             swPower.Close();
         }
 
