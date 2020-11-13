@@ -104,9 +104,7 @@ namespace experiments.Services
         {
             
             StreamWriter sw = new StreamWriter(filePath + ".dat");
-            StreamWriter swLine =
-                new StreamWriter(_pathDigitization + _currentDirectory.TrimEnd('m', 'k', 's') + "Line.dat",
-                    true);
+            
             
             int i = 0;
             int k = 0;
@@ -125,11 +123,15 @@ namespace experiments.Services
                     //     swCheckPxl.Close();
                     // }
 
-                    if (i == 407)
+                    if (i == 339)
                     {
+                        StreamWriter swLine =
+                            new StreamWriter(_pathDigitization + _currentDirectory.TrimEnd('m', 'k', 's') + nameFile + "Line.dat",
+                                true);
                         //swCheckPxl.Write(_currentDirectory.TrimEnd('m', 'k', 's') + "   ");
                         swLine.WriteLine(height[i]);
                         //_line[numbPower][k] = ToInt32(height[i]);
+                        swLine.Close();
                     
                     }
                     sw.Write(height[i] + "   ");
@@ -144,7 +146,7 @@ namespace experiments.Services
 
                 k++;
             }
-            swLine.Close();
+            
             sw.Close();
             StreamWriter swPower = new StreamWriter(_pathDigitization + _currentDirectory + "Power.dat", true);
             swPower.WriteLine(power);
