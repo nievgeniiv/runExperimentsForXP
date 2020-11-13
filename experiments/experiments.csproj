@@ -187,7 +187,39 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="lib" />
+    <Content Include="lib\InterfacesCore\Container.h" />
+    <Content Include="lib\InterfacesCore\ICheckable.h" />
+    <Content Include="lib\InterfacesCore\IChecker.h" />
+    <Content Include="lib\InterfacesCore\ICommandBuffer.h" />
+    <Content Include="lib\InterfacesCore\ICoreException.h" />
+    <Content Include="lib\InterfacesCore\Identificator.h" />
+    <Content Include="lib\InterfacesCore\IDevice.h" />
+    <Content Include="lib\InterfacesCore\IDeviceCreator.h" />
+    <Content Include="lib\InterfacesCore\IDeviceCreatorCallback.h" />
+    <Content Include="lib\InterfacesCore\IDeviceManager.h" />
+    <Content Include="lib\InterfacesCore\IEnvironment.h" />
+    <Content Include="lib\InterfacesCore\IFrame.h" />
+    <Content Include="lib\InterfacesCore\IFrameBuffer.h" />
+    <Content Include="lib\InterfacesCore\IFrameBufferObserver.h" />
+    <Content Include="lib\InterfacesCore\IFrameEventListener.h" />
+    <Content Include="lib\InterfacesCore\IMemAllocator.h" />
+    <Content Include="lib\InterfacesCore\IMemBlock.h" />
+    <Content Include="lib\InterfacesCore\IPair.h" />
+    <Content Include="lib\InterfacesCore\IPairIterator.h" />
+    <Content Include="lib\InterfacesCore\ISetting.h" />
+    <Content Include="lib\InterfacesCore\ISettingController.h" />
+    <Content Include="lib\InterfacesCore\ISettingEnum.h" />
+    <Content Include="lib\InterfacesCore\ISettingIterator.h" />
+    <Content Include="lib\InterfacesCore\ISettingNotify.h" />
+    <Content Include="lib\InterfacesCore\ISettingObserver.h" />
+    <Content Include="lib\InterfacesCore\ISettingRect.h" />
+    <Content Include="lib\InterfacesCore\ISettingScalar.h" />
+    <Content Include="lib\InterfacesCore\ISettingString.h" />
+    <Content Include="lib\InterfacesCore\ISettingTuner.h" />
+    <Content Include="lib\InterfacesCore\Iterator.h" />
+    <Content Include="lib\InterfacesCore\VsCoreException.h" />
+    <Content Include="lib\vscorelib_v4.dll" />
+    <Content Include="lib\vslib3.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
