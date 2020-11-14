@@ -5,7 +5,7 @@ namespace experiments.Models
     public class ModelDirectory
     {
         public string pathToDirectory;
-        
+
         public void CreateDirectory(string pathToDirectory)
         {
             DirectoryInfo dirInfo = new DirectoryInfo(pathToDirectory);
@@ -18,11 +18,22 @@ namespace experiments.Models
 
         public bool EmptyDirectory(string pathToDirectory)
         {
-            return Directory.GetDirectories(pathToDirectory).Length == 0;
+            DirectoryInfo dirInfo = new DirectoryInfo(pathToDirectory);
+            int dirCount = dirInfo.GetDirectories().Length;
+            if (dirCount == 0)
+            {
+                return false;
+            }
+
+            return true;
         }
         
-        private static string[] GetFiles(string pathToDirectory = "")
+        public string[] GetFiles(string pathToOriginalDirectory, string pathToDirectory = "")
         {
+            if (pathToDirectory == "")
+            {
+                return Directory.GetFiles(pathToOriginalDirectory);    
+            }
             return Directory.GetFiles(pathToDirectory);
         } 
     }

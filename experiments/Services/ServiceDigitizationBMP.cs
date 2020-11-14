@@ -1,15 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Windows.Forms;
+using experiments.Models;
+
 
 namespace experiments.Services
 {
     public class ServiceDigitizationBMP
     {
+
+        private static ModelBMP _modelBMP = new ModelBMP();
+        private static ModelDirectory _modelDirectory = new ModelDirectory();
         private static string _pathOriginal;
         private static string _pathDigitization;
         private static string[] _listDirectoryes;
@@ -25,37 +28,40 @@ namespace experiments.Services
         {
             70, 140, 210, 280, 350, 420, 490, 560, 630, 700
         };
-        
+
         public static void run(string path)
         {
             _pathOriginal = path + @"Original\";
             _pathDigitization = path + @"Digitization\";
-            if (isDirectory())
-            {
-                 _listDirectoryes = getListDirectory();
-                 
-                 foreach (string directory in _listDirectoryes)
-                 {
-                     string[] folders = directory.Split('\\');
-                     _currentDirectory = folders[folders.Length - 1];
-                     _newDir = _pathDigitization + folders[folders.Length - 1] + @"\";
-                     var dirInfo = new DirectoryInfo(_newDir);
-                     if (!dirInfo.Exists)
-                     {
-                         dirInfo.Create();
-                     }
-                     _listFiles = getFiles(directory);
-                     _line = new int[_listFiles.Length][];
-                     digitizationBMP();
-                 }
-            } else
-            {
-                _newDir = _pathDigitization;
-                _listFiles = getFiles();
-                digitizationBMP();
+            
+             if (_modelDirectory.EmptyDirectory(_pathOriginal))
+             {
+                 _listDirectoryes = _modelDirectory.GetListDirectory(_pathOriginal);
+            
+                foreach (string directory in _listDirectoryes)
+                {
+                    string[] folders = directory.Split('\\');
+                    _currentDirectory = folders[folders.Length - 1];
+                    _newDir = _pathDigitization + folders[folders.Length - 1] + @"\";
+                    var dirInfo = new DirectoryInfo(_newDir);
+                    if (!dirInfo.Exists)
+                    {
+                        dirInfo.Create();
+                    }
+            
+                    _listFiles = _modelDirectory.GetFiles(_pathOriginal, directory);
+                    _line = new int[_listFiles.Length][];
+                    digitizationBMP();
+                }
             }
-
-            _isArray = false;
+            else
+            {
+            //     _newDir = _pathDigitization;
+            //     _listFiles = _modelDirectory.GetFiles(_pathOriginal);
+            //     digitizationBMP();
+            }
+            //
+            // _isArray = false;
         }
 
         private static void digitizationBMP()
@@ -67,35 +73,22 @@ namespace experiments.Services
                 var nameFile = k[k.Length - 1].Split('.');
                 var newFile = _newDir + nameFile[0];
                 var newFilePower = _newDir + nameFile[0];
-                
+
                 if (nameFile[0] == "Thumbs" || nameFile.Length > 2)
                 {
                     continue;
                 }
+
                 var bitmap = new Bitmap(file);
-                var brightnessArray = GetBrightnessArray(bitmap);
-                _countPxl = brightnessArray.Length;
-                
-                float power = _calculatePower(brightnessArray);
+                _modelBMP.arrayFloat = GetBrightnessArray(bitmap);
+                _modelBMP.saveArrayFloatInFile(newFile);
+                float power = _calculatePower(_modelBMP.arrayFloat);
+                _modelBMP.savePowerInFile(power, _pathDigitization + _currentDirectory + "Power");
                 _isArray = false;
-                saveFile(brightnessArray, power, newFile, nameFile[0], i);
                 i++;
             }
-            StreamWriter swLine =
-                new StreamWriter(_pathDigitization + _currentDirectory.TrimEnd('m', 'k', 's') + "LineSimple.dat",
-                    false);
-            var j = 1;
-            for (int m = 0; m <= _countPxl - 1; m++)
-            {
-                swLine.Write(j + "   ");
-                for (int n = 0; n <= _listFiles.Length - 1; n++)
-                {
-                    swLine.Write(_line[n][m] + "   ");
-                }
-                swLine.WriteLine();
-                j++;
-            }
-            swLine.Close();
+
+            _modelBMP.saveArrayIntInFile(i,_pathDigitization + _currentDirectory.TrimEnd('m', 'k', 's') + "Line");
         }
 
         private static float _calculatePower(float[][] brightnessArray)
@@ -105,25 +98,26 @@ namespace experiments.Services
             {
                 foreach (var w in h)
                 {
-                   power += w;
+                    power += w;
                 }
             }
+
             return power;
         }
 
-        private static void saveFile(float[][] brightnessArray, float power, string filePath, string nameFile, int numbPower)
+        private static void saveFile(float[][] brightnessArray, float power, string filePath, string nameFile,
+            int numbPower)
         {
-            
+
             StreamWriter sw = new StreamWriter(filePath + ".dat");
-            
+
             int i = 0;
             int k = 0;
-            Console.WriteLine(_line);
             foreach (var height in brightnessArray)
             {
                 while (i < height.Length - 1)
                 {
-                   // if (_checkPxl.Contains(i) && _checkPxl.Contains(k) && i == k)
+                    // if (_checkPxl.Contains(i) && _checkPxl.Contains(k) && i == k)
                     // if (_checkPxl.Contains(k) && i == k)
                     // {
                     //     StreamWriter swCheckPxl =
@@ -136,10 +130,6 @@ namespace experiments.Services
 
                     if (i == 339)
                     {
-                        // StreamWriter swLine =
-                        //     new StreamWriter(_pathDigitization + _currentDirectory.TrimEnd('m', 'k', 's') + nameFile + "Line.dat",
-                        //         true);
-                        // swLine.WriteLine(height[i]);
                         if (_isArray == false)
                         {
                             _line[numbPower] = new int[brightnessArray.Length];
@@ -147,10 +137,9 @@ namespace experiments.Services
                         }
 
                         _line[numbPower][k] = Convert.ToInt32(height[i]);
-                        //MessageBox.Show(_line[k][numbPower].ToString());
-                        // swLine.Close();
 
                     }
+
                     sw.Write(height[i] + "   ");
                     i++;
                 }
@@ -163,6 +152,7 @@ namespace experiments.Services
 
                 k++;
             }
+
             sw.Close();
             StreamWriter swPower = new StreamWriter(_pathDigitization + _currentDirectory + "Power.dat", true);
             swPower.WriteLine(power);
@@ -183,6 +173,7 @@ namespace experiments.Services
                     result[y][x] = srcPixel.GetBrightness() * 255;
                 }
             }
+
             return result;
         }
 
@@ -199,16 +190,13 @@ namespace experiments.Services
             {
                 return false;
             }
+
             return true;
         }
 
-        private static string[] getFiles(string directory = "")
-        {
-            if (directory == "")
-            {
-                return Directory.GetFiles(_pathOriginal);    
-            }
-            return Directory.GetFiles(directory);
-        } 
+        // private static string[] getFiles(string directory = "")
+        // {
+        //
+        // }
     }
 }
