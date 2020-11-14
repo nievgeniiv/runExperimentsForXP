@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -16,7 +17,9 @@ namespace experiments.Services
         private static string[] _listFiles;
         private static string _newDir;
         private static string _currentDirectory;
-        private static int[][] _line = new int[10][];
+        private static int[][] _line;
+        private static bool? _isArray = false;
+        private static int _countPxl;
 
         private static int[] _checkPxl = new int [10]
         {
@@ -42,6 +45,7 @@ namespace experiments.Services
                          dirInfo.Create();
                      }
                      _listFiles = getFiles(directory);
+                     _line = new int[_listFiles.Length][];
                      digitizationBMP();
                  }
             } else
@@ -50,6 +54,8 @@ namespace experiments.Services
                 _listFiles = getFiles();
                 digitizationBMP();
             }
+
+            _isArray = false;
         }
 
         private static void digitizationBMP()
@@ -68,23 +74,28 @@ namespace experiments.Services
                 }
                 var bitmap = new Bitmap(file);
                 var brightnessArray = GetBrightnessArray(bitmap);
+                _countPxl = brightnessArray.Length;
                 
                 float power = _calculatePower(brightnessArray);
+                _isArray = false;
                 saveFile(brightnessArray, power, newFile, nameFile[0], i);
                 i++;
             }
-            // StreamWriter swLine =
-            //     new StreamWriter(_pathDigitization + _currentDirectory.TrimEnd('m', 'k', 's') + "Line.dat",
-            //         true);
-            // foreach (var arrayPxl in _line)
-            // {
-            //     foreach (var value in arrayPxl)
-            //     {
-            //         swLine.Write(value + "   ");
-            //     }
-            // }
-            // swLine.WriteLine();
-            // swLine.Close();
+            StreamWriter swLine =
+                new StreamWriter(_pathDigitization + _currentDirectory.TrimEnd('m', 'k', 's') + "LineSimple.dat",
+                    false);
+            var j = 1;
+            for (int m = 0; m <= _countPxl - 1; m++)
+            {
+                swLine.Write(j + "   ");
+                for (int n = 0; n <= _listFiles.Length - 1; n++)
+                {
+                    swLine.Write(_line[n][m] + "   ");
+                }
+                swLine.WriteLine();
+                j++;
+            }
+            swLine.Close();
         }
 
         private static float _calculatePower(float[][] brightnessArray)
@@ -105,9 +116,9 @@ namespace experiments.Services
             
             StreamWriter sw = new StreamWriter(filePath + ".dat");
             
-            
             int i = 0;
             int k = 0;
+            Console.WriteLine(_line);
             foreach (var height in brightnessArray)
             {
                 while (i < height.Length - 1)
@@ -125,14 +136,20 @@ namespace experiments.Services
 
                     if (i == 339)
                     {
-                        StreamWriter swLine =
-                            new StreamWriter(_pathDigitization + _currentDirectory.TrimEnd('m', 'k', 's') + nameFile + "Line.dat",
-                                true);
-                        //swCheckPxl.Write(_currentDirectory.TrimEnd('m', 'k', 's') + "   ");
-                        swLine.WriteLine(height[i]);
-                        //_line[numbPower][k] = ToInt32(height[i]);
-                        swLine.Close();
-                    
+                        // StreamWriter swLine =
+                        //     new StreamWriter(_pathDigitization + _currentDirectory.TrimEnd('m', 'k', 's') + nameFile + "Line.dat",
+                        //         true);
+                        // swLine.WriteLine(height[i]);
+                        if (_isArray == false)
+                        {
+                            _line[numbPower] = new int[brightnessArray.Length];
+                            _isArray = true;
+                        }
+
+                        _line[numbPower][k] = Convert.ToInt32(height[i]);
+                        //MessageBox.Show(_line[k][numbPower].ToString());
+                        // swLine.Close();
+
                     }
                     sw.Write(height[i] + "   ");
                     i++;
@@ -146,7 +163,6 @@ namespace experiments.Services
 
                 k++;
             }
-            
             sw.Close();
             StreamWriter swPower = new StreamWriter(_pathDigitization + _currentDirectory + "Power.dat", true);
             swPower.WriteLine(power);
