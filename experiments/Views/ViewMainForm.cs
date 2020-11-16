@@ -127,18 +127,16 @@ namespace experiments
 
         private void openFolder_Click(object sender, EventArgs e)
         {
-            // using(var fbd = new FolderBrowserDialog())
-            // {
-            //     DialogResult result = fbd.ShowDialog();
-            //
-            //     if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
-            //     {
-            //         _pathDirectory = fbd.SelectedPath;
-            //         MessageBox.Show(_pathDirectory);
-            //         openDirectory(this, EventArgs.Empty);
-            //     }
-            // }
-            _pathDirectory = @"E:\Данные по диссеру\11.11.2020\11.11.2020\ResultsTest";
+            using(var fbd = new FolderBrowserDialog())
+            {
+                DialogResult result = fbd.ShowDialog();
+            
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+                {
+                    _pathDirectory = fbd.SelectedPath;
+                    openDirectory(this, EventArgs.Empty);
+                }
+            }
             openDirectory(this, EventArgs.Empty);
             MessageBox.Show("Digilization is complite");
         }

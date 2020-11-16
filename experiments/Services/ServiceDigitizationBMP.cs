@@ -16,79 +16,69 @@ namespace experiments.Services
         private static string _pathOriginal;
         private static string _pathDigitization;
         private static string[] _listDirectoryes;
-        private static DirectoryInfo _dirInfo;
         private static string[] _listFiles;
         private static string _newDir;
         private static string _currentDirectory;
-        private static int[][] _line;
-        private static bool? _isArray = false;
-        private static int _countPxl;
-
-        private static int[] _checkPxl = new int [10]
-        {
-            70, 140, 210, 280, 350, 420, 490, 560, 630, 700
-        };
 
         public static void run(string path)
         {
             _pathOriginal = path + @"Original\";
             _pathDigitization = path + @"Digitization\";
-            
-             if (_modelDirectory.EmptyDirectory(_pathOriginal))
-             {
-                 _listDirectoryes = _modelDirectory.GetListDirectory(_pathOriginal);
-            
+
+            if (_modelDirectory.EmptyDirectory(_pathOriginal))
+            {
+                _listDirectoryes = _modelDirectory.GetListDirectory(_pathOriginal);
+
                 foreach (string directory in _listDirectoryes)
                 {
-                    string[] folders = directory.Split('\\');
-                    _currentDirectory = folders[folders.Length - 1];
-                    _newDir = _pathDigitization + folders[folders.Length - 1] + @"\";
-                    var dirInfo = new DirectoryInfo(_newDir);
-                    if (!dirInfo.Exists)
-                    {
-                        dirInfo.Create();
-                    }
-            
+                    makePathNewDir(directory);
+                    _modelDirectory.CreateDirectory(_newDir);
+                    
                     _listFiles = _modelDirectory.GetFiles(_pathOriginal, directory);
-                    _line = new int[_listFiles.Length][];
-                    digitizationBMP();
+                    int i = 0;
+                    int countNeedFiles = _listFiles.Length;
+                    foreach (string file in _listFiles)
+                    {
+                        var nameFile = makePathNewFile(file);
+                        if (nameFile[0] == "Thumbs" || nameFile.Length > 2)
+                        {
+                            countNeedFiles--;
+                        }
+                    }
+
+                    ModelBMP.arrayInt = new int[countNeedFiles][];
+                    foreach (string file in _listFiles)
+                    {
+                        var nameFile = makePathNewFile(file);
+                        string newFile = _newDir + nameFile[0];
+
+                        if (nameFile[0] == "Thumbs" || nameFile.Length > 2)
+                        {
+                            continue;
+                        }
+                        digitizationBMP(i, file);
+                        _modelBMP.saveArrayFloatInFile(i, newFile);
+                        float power = _calculatePower(ModelBMP.arrayFloat);
+                        _modelBMP.savePowerInFile(power, _pathDigitization + _currentDirectory + "Power");
+                        ModelBMP.isArray = false;
+                        i++;
+                    }
+
+                    _modelBMP.saveArrayIntInFile(_pathDigitization + _currentDirectory.TrimEnd('m', 'k', 's') + "Line");
                 }
             }
             else
             {
-            //     _newDir = _pathDigitization;
-            //     _listFiles = _modelDirectory.GetFiles(_pathOriginal);
-            //     digitizationBMP();
+                _newDir = _pathDigitization;
+                _listFiles = _modelDirectory.GetFiles(_pathOriginal);
+                //digitizationBMP();
             }
-            //
-            // _isArray = false;
         }
 
-        private static void digitizationBMP()
+        private static void digitizationBMP(int i, string file)
         {
-            int i = 0;
-            foreach (string file in _listFiles)
-            {
-                var k = file.Split('\\');
-                var nameFile = k[k.Length - 1].Split('.');
-                var newFile = _newDir + nameFile[0];
-                var newFilePower = _newDir + nameFile[0];
-
-                if (nameFile[0] == "Thumbs" || nameFile.Length > 2)
-                {
-                    continue;
-                }
-
-                var bitmap = new Bitmap(file);
-                _modelBMP.arrayFloat = GetBrightnessArray(bitmap);
-                _modelBMP.saveArrayFloatInFile(newFile);
-                float power = _calculatePower(_modelBMP.arrayFloat);
-                _modelBMP.savePowerInFile(power, _pathDigitization + _currentDirectory + "Power");
-                _isArray = false;
-                i++;
-            }
-
-            _modelBMP.saveArrayIntInFile(i,_pathDigitization + _currentDirectory.TrimEnd('m', 'k', 's') + "Line");
+            var bitmap = new Bitmap(file);
+            ModelBMP.arrayFloat = GetBrightnessArray(bitmap);
         }
 
         private static float _calculatePower(float[][] brightnessArray)
@@ -103,60 +93,6 @@ namespace experiments.Services
             }
 
             return power;
-        }
-
-        private static void saveFile(float[][] brightnessArray, float power, string filePath, string nameFile,
-            int numbPower)
-        {
-
-            StreamWriter sw = new StreamWriter(filePath + ".dat");
-
-            int i = 0;
-            int k = 0;
-            foreach (var height in brightnessArray)
-            {
-                while (i < height.Length - 1)
-                {
-                    // if (_checkPxl.Contains(i) && _checkPxl.Contains(k) && i == k)
-                    // if (_checkPxl.Contains(k) && i == k)
-                    // {
-                    //     StreamWriter swCheckPxl =
-                    //         new StreamWriter(_pathDigitization + _currentDirectory.TrimEnd('m', 'k', 's') + "ChekcPxl(" + i.ToString() + ").dat",
-                    //             true);
-                    //     //swCheckPxl.Write(_currentDirectory.TrimEnd('m', 'k', 's') + "   ");
-                    //     swCheckPxl.WriteLine(height[i]);
-                    //     swCheckPxl.Close();
-                    // }
-
-                    if (i == 339)
-                    {
-                        if (_isArray == false)
-                        {
-                            _line[numbPower] = new int[brightnessArray.Length];
-                            _isArray = true;
-                        }
-
-                        _line[numbPower][k] = Convert.ToInt32(height[i]);
-
-                    }
-
-                    sw.Write(height[i] + "   ");
-                    i++;
-                }
-
-                if (i == height.Length - 1)
-                {
-                    sw.WriteLine(height[i]);
-                    i = 0;
-                }
-
-                k++;
-            }
-
-            sw.Close();
-            StreamWriter swPower = new StreamWriter(_pathDigitization + _currentDirectory + "Power.dat", true);
-            swPower.WriteLine(power);
-            swPower.Close();
         }
 
         private static float[][] GetBrightnessArray(Bitmap srcImage)
@@ -176,27 +112,17 @@ namespace experiments.Services
 
             return result;
         }
-
-        private static string[] getListDirectory()
-        {
-            return Directory.GetDirectories(_pathOriginal);
+        
+        private static void makePathNewDir(string directory) {
+            string[] folders = directory.Split('\\');
+            _currentDirectory = folders[folders.Length - 1];
+            _newDir = _pathDigitization + folders[folders.Length - 1] + @"\";
         }
 
-        private static bool isDirectory()
+        private static string[] makePathNewFile(string file)
         {
-            _dirInfo = new DirectoryInfo(_pathOriginal);
-            int dirCount = _dirInfo.GetDirectories().Length;
-            if (dirCount == 0)
-            {
-                return false;
-            }
-
-            return true;
+            var k = file.Split('\\');
+            return k[k.Length - 1].Split('.');
         }
-
-        // private static string[] getFiles(string directory = "")
-        // {
-        //
-        // }
     }
 }

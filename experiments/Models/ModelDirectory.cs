@@ -9,6 +9,10 @@ namespace experiments.Models
         public void CreateDirectory(string pathToDirectory)
         {
             DirectoryInfo dirInfo = new DirectoryInfo(pathToDirectory);
+            if (!dirInfo.Exists)
+            {
+                dirInfo.Create();
+            }
         }
 
         public string[] GetListDirectory(string pathToDirectory = "")
