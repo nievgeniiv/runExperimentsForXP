@@ -15,7 +15,6 @@ namespace experiments
     public partial class ViewMainForm : Form, IViewMainForm
     {
 
-        private string _pathDirectory;
         private string _typeExperiments;
         private float _concentration;
         private string _errorNotConcentration = "Не введена концентрация вещества!";
@@ -119,26 +118,11 @@ namespace experiments
             this.ConcentrationTextBox.Text = "";
         }
 
-        public string getPathDirectory()
-        {
-            return _pathDirectory;
-        }
-        
-
         private void openFolder_Click(object sender, EventArgs e)
         {
-            using(var fbd = new FolderBrowserDialog())
-            {
-                DialogResult result = fbd.ShowDialog();
-            
-                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
-                {
-                    _pathDirectory = fbd.SelectedPath;
-                    openDirectory(this, EventArgs.Empty);
-                }
-            }
-            openDirectory(this, EventArgs.Empty);
-            MessageBox.Show("Digilization is complite");
+            ViewCenterImages view = new ViewCenterImages();
+            PresentCenterImages present = new PresentCenterImages(view);
+            view.Show();
         }
     }
 }

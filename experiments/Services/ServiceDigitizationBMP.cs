@@ -19,11 +19,13 @@ namespace experiments.Services
         private static string[] _listFiles;
         private static string _newDir;
         private static string _currentDirectory;
+        private static int[] _centerPxl = new int[2];
 
-        public static void run(string path)
+        public static void run(string path, int[] centerPxl)
         {
             _pathOriginal = path + @"Original\";
             _pathDigitization = path + @"Digitization\";
+            _centerPxl = centerPxl;
 
             if (_modelDirectory.EmptyDirectory(_pathOriginal))
             {
@@ -64,6 +66,7 @@ namespace experiments.Services
                         i++;
                     }
 
+                    _modelBMP.centerPxl = _centerPxl;
                     _modelBMP.saveArrayIntInFile(_pathDigitization + _currentDirectory.TrimEnd('m', 'k', 's') + "Line");
                 }
             }

@@ -6,6 +6,7 @@ namespace experiments.Models
 {
     public class ModelBMP
     {
+        public int[] centerPxl = new int[2];
         public static int[][] arrayInt { get; set; }
         public static float[][] arrayFloat { get; set; }
         public static bool? isArray { get; set; }
@@ -25,7 +26,7 @@ namespace experiments.Models
             {
                 while (i < height.Length - 1)
                 {
-                    if (i == 339)
+                    if (i == centerPxl[1])
                     {
                         if (isArray == false)
                         {

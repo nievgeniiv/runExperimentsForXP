@@ -83,6 +83,7 @@
     </Compile>
     <Compile Include="InterfacesViews\IViewAboutForm.cs" />
     <Compile Include="InterfacesViews\IViewCameraSettings.cs" />
+    <Compile Include="InterfacesViews\IViewCenterImages.cs" />
     <Compile Include="InterfacesViews\IViewCommonSettings.cs" />
     <Compile Include="InterfacesViews\IViewMainForm.cs" />
     <Compile Include="InterfacesViews\IViewLaserSettings.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Models\ModelSettings.cs" />
     <Compile Include="Presents\PresentAboutProgram.cs" />
     <Compile Include="Presents\PresentCameraSettings.cs" />
+    <Compile Include="Presents\PresentCenterImages.cs" />
     <Compile Include="Presents\PresentCommonSettings.cs" />
     <Compile Include="Presents\PresentMainForm.cs" />
     <Compile Include="Presents\PresentLaserSettings.cs" />
@@ -110,6 +112,12 @@
     </Compile>
     <Compile Include="Views\ViewCameraSettings.Designer.cs">
       <DependentUpon>ViewCameraSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ViewCenterImages.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ViewCenterImages.Designer.cs">
+      <DependentUpon>ViewCenterImages.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\ViewCommonSettings.cs">
       <SubType>Form</SubType>
@@ -142,6 +150,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ViewCameraSettings.resx">
       <DependentUpon>ViewCameraSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ViewCenterImages.resx">
+      <DependentUpon>ViewCenterImages.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ViewCommonSettings.resx">
       <DependentUpon>ViewCommonSettings.cs</DependentUpon>

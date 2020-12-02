@@ -11,10 +11,7 @@ namespace experiments.Presents
     class PresentMainForm
     {
         IViewMainForm _IView;
-        private ModelDirectory _modelDirectory = new ModelDirectory();
-
-        private string[] _path;
-        private string _pathDirectory;
+        
         private string _typeExperiments;
         private float _concentration;
 
@@ -22,34 +19,6 @@ namespace experiments.Presents
         {
             _IView = IVew;
             _IView.runExperimetns += new EventHandler<EventArgs>(_runExperiments);
-            _IView.openDirectory += new EventHandler<EventArgs>(_openDirectory);
-        }
-
-        private void _openDirectory(object sender, EventArgs e)
-        {
-            string _newPath = "";
-            bool end = false;
-            _pathDirectory = _IView.getPathDirectory();
-            _path = _pathDirectory.Split('\\');
-            foreach (string v in _path)
-            {
-                if (end)
-                {
-                    continue;
-                }
-                if (v == "Result")
-                {
-                    end = true;
-                }
-                _newPath = String.Concat(_newPath,  v + '\\');
-            }
-            DirectoryInfo dirInfo = new DirectoryInfo(_newPath + "Digitization");
-            if (!dirInfo.Exists)
-            {
-                dirInfo.Create();
-            }
-
-            Services.ServiceDigitizationBMP.run(_newPath);
         }
 
         private void _runExperiments(object sender, EventArgs e)
