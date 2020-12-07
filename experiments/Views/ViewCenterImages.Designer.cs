@@ -53,7 +53,7 @@ namespace experiments.Views
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 23);
             this.label2.TabIndex = 1;
-            this.label2.Text = "По оси Х";
+            this.label2.Text = "По оси Y";
             // 
             // label3
             // 
@@ -62,7 +62,7 @@ namespace experiments.Views
             this.label3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label3.Size = new System.Drawing.Size(55, 23);
             this.label3.TabIndex = 2;
-            this.label3.Text = "По оси Y";
+            this.label3.Text = "По оси X";
             // 
             // textBox1
             // 
