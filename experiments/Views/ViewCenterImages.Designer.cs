@@ -49,7 +49,7 @@ namespace experiments.Views
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(29, 37);
+            this.label2.Location = new System.Drawing.Point(194, 37);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 23);
             this.label2.TabIndex = 1;
@@ -57,7 +57,7 @@ namespace experiments.Views
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(183, 37);
+            this.label3.Location = new System.Drawing.Point(29, 37);
             this.label3.Name = "label3";
             this.label3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label3.Size = new System.Drawing.Size(55, 23);
@@ -66,14 +66,14 @@ namespace experiments.Views
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 63);
+            this.textBox1.Location = new System.Drawing.Point(162, 63);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 20);
             this.textBox1.TabIndex = 3;
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(162, 63);
+            this.textBox2.Location = new System.Drawing.Point(12, 63);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(100, 20);
             this.textBox2.TabIndex = 4;
