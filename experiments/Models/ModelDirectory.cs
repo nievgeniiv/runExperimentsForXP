@@ -24,21 +24,12 @@ namespace experiments.Models
         {
             DirectoryInfo dirInfo = new DirectoryInfo(pathToDirectory);
             int dirCount = dirInfo.GetDirectories().Length;
-            if (dirCount == 0)
-            {
-                return false;
-            }
-
-            return true;
+            return dirCount == 0;
         }
         
         public string[] GetFiles(string pathToOriginalDirectory, string pathToDirectory = "")
         {
-            if (pathToDirectory == "")
-            {
-                return Directory.GetFiles(pathToOriginalDirectory);    
-            }
-            return Directory.GetFiles(pathToDirectory);
+            return Directory.GetFiles(pathToDirectory == "" ? pathToOriginalDirectory : pathToDirectory);
         } 
     }
 }

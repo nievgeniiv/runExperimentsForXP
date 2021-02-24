@@ -15,7 +15,7 @@ namespace experiments.Services
         private static ModelDirectory _modelDirectory = new ModelDirectory();
         private static string _pathOriginal;
         private static string _pathDigitization;
-        private static string[] _listDirectoryes;
+        private static string[] _listDirectories;
         private static string[] _listFiles;
         private static string _newDir;
         private static string _currentDirectory;
@@ -27,11 +27,11 @@ namespace experiments.Services
             _pathDigitization = path + @"Digitization\";
             _centerPxl = centerPxl;
 
-            if (_modelDirectory.EmptyDirectory(_pathOriginal))
+            if (!_modelDirectory.EmptyDirectory(_pathOriginal))
             {
-                _listDirectoryes = _modelDirectory.GetListDirectory(_pathOriginal);
+                _listDirectories = _modelDirectory.GetListDirectory(_pathOriginal);
 
-                foreach (string directory in _listDirectoryes)
+                foreach (string directory in _listDirectories)
                 {
                     makePathNewDir(directory);
                     _modelDirectory.CreateDirectory(_newDir);
