@@ -78,6 +78,10 @@ namespace experiments.Services
             }
         }
 
+        
+        
+        
+        
         private static void digitizationBMP(int i, string file)
         {
             var bitmap = new Bitmap(file);
