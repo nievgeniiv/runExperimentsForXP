@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Windows.Forms;
+using System.Text.RegularExpressions;
 using experiments.Models;
 
 
@@ -27,55 +27,78 @@ namespace experiments.Services
             _pathDigitization = path + @"Digitization\";
             _centerPxl = centerPxl;
 
-            if (!_modelDirectory.EmptyDirectory(_pathOriginal))
+            ModelDirectory.MakeTreeFiles(_pathOriginal);
+            StreamWriter digitizationFile = new StreamWriter(_pathOriginal + "path.txt");
+            Regex regex = new Regex(@".\.txt|.\.db");
+            int i = 0;
+            foreach (var pathToFile in ModelDirectory.pathForFile)
             {
-                _listDirectories = _modelDirectory.GetListDirectory(_pathOriginal);
-
-                foreach (string directory in _listDirectories)
+                MatchCollection matches = regex.Matches(pathToFile);
+                if (matches.Count > 0)
                 {
-                    makePathNewDir(directory);
-                    _modelDirectory.CreateDirectory(_newDir);
-                    
-                    _listFiles = _modelDirectory.GetFiles(_pathOriginal, directory);
-                    int i = 0;
-                    int countNeedFiles = _listFiles.Length;
-                    foreach (string file in _listFiles)
-                    {
-                        var nameFile = makePathNewFile(file);
-                        if (nameFile[0] == "Thumbs" || nameFile.Length > 2)
-                        {
-                            countNeedFiles--;
-                        }
-                    }
-
-                    ModelBMP.arrayInt = new int[countNeedFiles][];
-                    foreach (string file in _listFiles)
-                    {
-                        var nameFile = makePathNewFile(file);
-                        string newFile = _newDir + nameFile[0];
-
-                        if (nameFile[0] == "Thumbs" || nameFile.Length > 2)
-                        {
-                            continue;
-                        }
-                        digitizationBMP(i, file);
-                        _modelBMP.saveArrayFloatInFile(i, newFile);
-                        float power = _calculatePower(ModelBMP.arrayFloat);
-                        _modelBMP.savePowerInFile(power, _pathDigitization + _currentDirectory + "Power");
-                        ModelBMP.isArray = false;
-                        i++;
-                    }
-
-                    _modelBMP.centerPxl = _centerPxl;
-                    _modelBMP.saveArrayIntInFile(_pathDigitization + _currentDirectory.TrimEnd('m', 'k', 's') + "Line");
+                    continue;
                 }
+                digitizationBMP(i, pathToFile);
+                _modelBMP.saveArrayFloatInFile(i, pathToFile.Replace("Original", "Digitization"));
+                float power = _calculatePower(ModelBMP.arrayFloat);
+                _modelBMP.savePowerInFile(power, _pathDigitization + _currentDirectory + "Power");
+                ModelBMP.isArray = false;
+                digitizationFile.WriteLine(pathToFile);
+                i++;
             }
-            else
-            {
-                _newDir = _pathDigitization;
-                _listFiles = _modelDirectory.GetFiles(_pathOriginal);
-                //digitizationBMP();
-            }
+            digitizationFile.Close();
+            _modelBMP.centerPxl = _centerPxl;
+            _modelBMP.saveArrayIntInFile(_pathDigitization + _currentDirectory.TrimEnd('m', 'k', 's') + "Line");
+            // TODO: Проверить работу программы. Если все хокей удалить закомментированный и неиспользующийся код
+            // if (!_modelDirectory.EmptyDirectory(_pathOriginal))
+            // {
+            //     _listDirectories = _modelDirectory.GetListDirectory(_pathOriginal);
+            //
+            //     foreach (string directory in _listDirectories)
+            //     {
+            //         makePathNewDir(directory);
+            //         _modelDirectory.CreateDirectory(_newDir);
+            //         
+            //         _listFiles = _modelDirectory.GetFiles(_pathOriginal, directory);
+            //         int i = 0;
+            //         int countNeedFiles = _listFiles.Length;
+            //         foreach (string file in _listFiles)
+            //         {
+            //             var nameFile = makePathNewFile(file);
+            //             if (nameFile[0] == "Thumbs" || nameFile.Length > 2)
+            //             {
+            //                 countNeedFiles--;
+            //             }
+            //         }
+            //
+            //         ModelBMP.arrayInt = new int[countNeedFiles][];
+            //         foreach (string file in _listFiles)
+            //         {
+            //             var nameFile = makePathNewFile(file);
+            //             string newFile = _newDir + nameFile[0];
+            //
+            //             if (nameFile[0] == "Thumbs" || nameFile.Length > 2)
+            //             {
+            //                 continue;
+            //             }
+            //             digitizationBMP(i, file);
+            //             _modelBMP.saveArrayFloatInFile(i, newFile);
+            //             float power = _calculatePower(ModelBMP.arrayFloat);
+            //             _modelBMP.savePowerInFile(power, _pathDigitization + _currentDirectory + "Power");
+            //             ModelBMP.isArray = false;
+            //             i++;
+            //         }
+            //
+            //         _modelBMP.centerPxl = _centerPxl;
+            //         _modelBMP.saveArrayIntInFile(_pathDigitization + _currentDirectory.TrimEnd('m', 'k', 's') + "Line");
+            //     }
+            // }
+            // else
+            // {
+            //     _newDir = _pathDigitization;
+            //     _listFiles = _modelDirectory.GetFiles(_pathOriginal);
+            //     //digitizationBMP();
+            // }
         }
 
         
