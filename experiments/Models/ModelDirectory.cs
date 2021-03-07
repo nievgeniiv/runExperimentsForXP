@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace experiments.Models
 {
     public class ModelDirectory
     {
-        public static List<string> pathForFile = new List<string>();
+        public readonly List<string> pathForDir = new List<string>();
+        public List<string> listFiles;
 
         public void CreateDirectory(string pathToDirectory)
         {
@@ -16,24 +19,23 @@ namespace experiments.Models
             }
         }
 
-        public string[] GetListDirectory(string pathToDirectory = "")
+        public void GetFiles(string pathToOriginalDirectory, string pathToDirectory = "")
         {
-            return Directory.GetDirectories(pathToDirectory);
-        }
-
-        public bool EmptyDirectory(string pathToDirectory)
-        {
-            DirectoryInfo dirInfo = new DirectoryInfo(pathToDirectory);
-            int dirCount = dirInfo.GetDirectories().Length;
-            return dirCount == 0;
+            listFiles = new List<string>();
+            string[] list = Directory.GetFiles(pathToDirectory == "" ? pathToOriginalDirectory : pathToDirectory);
+            Regex regex = new Regex(@".\.txt|.\.db");
+            foreach (var file in list)
+            {
+                MatchCollection matches = regex.Matches(file);
+                if (matches.Count > 0)
+                {
+                    continue;
+                }
+                listFiles.Add(file);
+            }
         }
         
-        public string[] GetFiles(string pathToOriginalDirectory, string pathToDirectory = "")
-        {
-            return Directory.GetFiles(pathToDirectory == "" ? pathToOriginalDirectory : pathToDirectory);
-        }
-        
-        public static void MakeTreeFiles(string path)
+        public void MakeTreeDirectories(string path)
         {
             DirectoryInfo dirInfo = new DirectoryInfo(path);
             int dirCount = dirInfo.GetDirectories().Length;
@@ -41,17 +43,8 @@ namespace experiments.Models
             
             if (filesCount > 0)
             {
-                string[] listFiles = Directory.GetFiles(path);
-                foreach (var file in listFiles)
-                {
-                    DirectoryInfo dirInfoNew = new DirectoryInfo(path.Replace("Original", "Digitization"));
-                    if (!dirInfoNew.Exists)
-                    {
-                        dirInfoNew.Create();
-                    }
-                    
-                    pathForFile.Add(file);
-                }
+                CreateDirectory(path.Replace("Original", "Digitization"));
+                pathForDir.Add(path);
             }
             
             if (dirCount > 0)
@@ -59,7 +52,7 @@ namespace experiments.Models
                 string[] listDirectories = Directory.GetDirectories(path);
                 foreach (var directory in listDirectories)
                 {
-                    MakeTreeFiles(directory);
+                    MakeTreeDirectories(directory);
                 }
             }
         }

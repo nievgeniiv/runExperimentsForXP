@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 using experiments.Models;
 
 
@@ -14,98 +15,43 @@ namespace experiments.Services
         private static ModelBMP _modelBMP = new ModelBMP();
         private static ModelDirectory _modelDirectory = new ModelDirectory();
         private static string _pathOriginal;
-        private static string _pathDigitization;
-        private static string[] _listDirectories;
-        private static string[] _listFiles;
-        private static string _newDir;
-        private static string _currentDirectory;
         private static int[] _centerPxl = new int[2];
 
         public static void run(string path, int[] centerPxl)
         {
             _pathOriginal = path + @"Original\";
-            _pathDigitization = path + @"Digitization\";
             _centerPxl = centerPxl;
 
-            ModelDirectory.MakeTreeFiles(_pathOriginal);
-            StreamWriter digitizationFile = new StreamWriter(_pathOriginal + "path.txt");
-            Regex regex = new Regex(@".\.txt|.\.db");
-            int i = 0;
-            foreach (var pathToFile in ModelDirectory.pathForFile)
-            {
-                MatchCollection matches = regex.Matches(pathToFile);
-                if (matches.Count > 0)
-                {
-                    continue;
-                }
-                digitizationBMP(i, pathToFile);
-                _modelBMP.saveArrayFloatInFile(i, pathToFile.Replace("Original", "Digitization"));
-                float power = _calculatePower(ModelBMP.arrayFloat);
-                _modelBMP.savePowerInFile(power, _pathDigitization + _currentDirectory + "Power");
-                ModelBMP.isArray = false;
-                digitizationFile.WriteLine(pathToFile);
-                i++;
-            }
-            digitizationFile.Close();
-            _modelBMP.centerPxl = _centerPxl;
-            _modelBMP.saveArrayIntInFile(_pathDigitization + _currentDirectory.TrimEnd('m', 'k', 's') + "Line");
-            // TODO: Проверить работу программы. Если все хокей удалить закомментированный и неиспользующийся код
-            // if (!_modelDirectory.EmptyDirectory(_pathOriginal))
-            // {
-            //     _listDirectories = _modelDirectory.GetListDirectory(_pathOriginal);
-            //
-            //     foreach (string directory in _listDirectories)
-            //     {
-            //         makePathNewDir(directory);
-            //         _modelDirectory.CreateDirectory(_newDir);
-            //         
-            //         _listFiles = _modelDirectory.GetFiles(_pathOriginal, directory);
-            //         int i = 0;
-            //         int countNeedFiles = _listFiles.Length;
-            //         foreach (string file in _listFiles)
-            //         {
-            //             var nameFile = makePathNewFile(file);
-            //             if (nameFile[0] == "Thumbs" || nameFile.Length > 2)
-            //             {
-            //                 countNeedFiles--;
-            //             }
-            //         }
-            //
-            //         ModelBMP.arrayInt = new int[countNeedFiles][];
-            //         foreach (string file in _listFiles)
-            //         {
-            //             var nameFile = makePathNewFile(file);
-            //             string newFile = _newDir + nameFile[0];
-            //
-            //             if (nameFile[0] == "Thumbs" || nameFile.Length > 2)
-            //             {
-            //                 continue;
-            //             }
-            //             digitizationBMP(i, file);
-            //             _modelBMP.saveArrayFloatInFile(i, newFile);
-            //             float power = _calculatePower(ModelBMP.arrayFloat);
-            //             _modelBMP.savePowerInFile(power, _pathDigitization + _currentDirectory + "Power");
-            //             ModelBMP.isArray = false;
-            //             i++;
-            //         }
-            //
-            //         _modelBMP.centerPxl = _centerPxl;
-            //         _modelBMP.saveArrayIntInFile(_pathDigitization + _currentDirectory.TrimEnd('m', 'k', 's') + "Line");
-            //     }
-            // }
-            // else
-            // {
-            //     _newDir = _pathDigitization;
-            //     _listFiles = _modelDirectory.GetFiles(_pathOriginal);
-            //     //digitizationBMP();
-            // }
-        }
+            _modelDirectory.MakeTreeDirectories(_pathOriginal);
 
+            foreach (var pathToDir in _modelDirectory.pathForDir)
+            {
+                _modelDirectory.GetFiles(pathToDir);
+
+                int i = 0;
+                int countNeedFiles = _modelDirectory.listFiles.Count;
+                ModelBMP.arrayInt = new int[countNeedFiles][];
+
+                foreach (string file in _modelDirectory.listFiles)
+                {
+                    var nameFile = makePathNewFile(file);
+                    string newFile = pathToDir.Replace("Original", "Digitization") + "\\" + nameFile[0];
+
+                    digitizationBMP(file);
+                    _modelBMP.saveArrayFloatInFile(i, newFile);
+                    float power = _calculatePower(ModelBMP.arrayFloat);
+                    _modelBMP.savePowerInFile(power, newFile + "Power");
+                    ModelBMP.isArray = false;
+                    i++;
+                }
+                
+                _modelBMP.centerPxl = _centerPxl;
+                string pathSave = pathToDir.Replace("Original", "Digitization");
+                _modelBMP.saveArrayIntInFile(pathSave.TrimEnd('m', 'k', 's') + "Line");
+            }
+        }
         
-        
-        
-        
-        private static void digitizationBMP(int i, string file)
+        private static void digitizationBMP(string file)
         {
             var bitmap = new Bitmap(file);
             ModelBMP.arrayFloat = GetBrightnessArray(bitmap);
@@ -141,12 +87,6 @@ namespace experiments.Services
             }
 
             return result;
-        }
-        
-        private static void makePathNewDir(string directory) {
-            string[] folders = directory.Split('\\');
-            _currentDirectory = folders[folders.Length - 1];
-            _newDir = _pathDigitization + folders[folders.Length - 1] + @"\";
         }
 
         private static string[] makePathNewFile(string file)
