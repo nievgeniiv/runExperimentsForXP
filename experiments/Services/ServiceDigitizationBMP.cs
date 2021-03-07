@@ -22,10 +22,12 @@ namespace experiments.Services
             _pathOriginal = path + @"Original\";
             _centerPxl = centerPxl;
 
-            _modelDirectory.MakeTreeDirectories(_pathOriginal);
+            _modelDirectory.MakeTreeDirectories(path);
 
             foreach (var pathToDir in _modelDirectory.pathForDir)
             {
+                MessageBox.Show(pathToDir);
+                // TODO: Не работает когда открывает вторую дату. Почему-то создается файл DigitizationLine.dat в этой папке
                 _modelDirectory.GetFiles(pathToDir);
 
                 int i = 0;

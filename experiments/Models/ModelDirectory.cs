@@ -9,6 +9,7 @@ namespace experiments.Models
     {
         public readonly List<string> pathForDir = new List<string>();
         public List<string> listFiles;
+        private string _nameDirDigitization = "Digitization";
 
         public void CreateDirectory(string pathToDirectory)
         {
@@ -49,9 +50,16 @@ namespace experiments.Models
             
             if (dirCount > 0)
             {
+                Regex regex = new Regex(_nameDirDigitization);
                 string[] listDirectories = Directory.GetDirectories(path);
                 foreach (var directory in listDirectories)
                 {
+                    MatchCollection matches = regex.Matches(directory);
+                    if (matches.Count > 0)
+                    {
+                        continue;
+                    }
+                    
                     MakeTreeDirectories(directory);
                 }
             }
