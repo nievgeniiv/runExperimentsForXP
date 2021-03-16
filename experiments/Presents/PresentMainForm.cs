@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows.Forms;
 using experiments.InterfacesViews;
 using experiments.Models;
+using experiments.Services;
 
 namespace experiments.Presents
 {
@@ -27,6 +28,8 @@ namespace experiments.Presents
             _typeExperiments = _IView.getTypeExperiments();
             _IView.clearConcentration();
             MessageBox.Show("Эксперимент запущен!");
+            ServiceStepMotor.stepMotorGoSerious();
+            MessageBox.Show("Эксперимент закончен!");
         }
     }
 }

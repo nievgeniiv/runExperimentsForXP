@@ -68,6 +68,28 @@ namespace experiments.Services
             _comPort.Write(action);
         }
 
+        public static void stepMotorGoSerious()
+        {
+            if (!isConnectComPort())
+            {
+                MessageBox.Show(_messageErrorNotConnectComPortText);
+                return;
+            }
+            
+            for (int i = 1; i <= 4; i++)
+            {
+                _comPort.Write(TRANSMITTER_SECTOR_FORWARD);
+                System.Threading.Thread.Sleep(1000);
+                MessageBox.Show("Transmitter in Sector: " + i.ToString());
+                for (int j = 1; j <= 4; j++)
+                {
+                    _comPort.Write(RECEIVER_SECTOR_FORWARD);
+                    System.Threading.Thread.Sleep(1000);
+                    MessageBox.Show("Receiver in Sector: " + j.ToString());
+                }
+            }
+        }
+
         public static bool isConnectComPort()
         {
             if (_comPort == null)

@@ -17,27 +17,35 @@ void loop()
     {
       case '1':
         GoOnStep("transmitter", "forward");
+        Serial.print("en");
         break;
       case '2':
         GoOnStep("transmitter", "back");
+        Serial.print("en");
         break;
       case '3':
         GoOnStep("receiver", "forward");
+        Serial.print("en");
         break;
       case '4':
         GoOnStep("receiver", "back");
+        Serial.print("en");
         break;
       case '0':
         GoOnSector("transmitter", "forward");
+        Serial.print("en");
         break;
       case '9':
         GoOnSector("transmitter", "back");
+        Serial.print("en");
         break;
       case '8':
         GoOnSector("receiver", "forward");
+        Serial.print("en");
         break;
       case '7':
         GoOnSector("receiver", "back");
+        Serial.print("en");
         break;
     }
   }
@@ -54,16 +62,16 @@ void GoOnStep(const char* Motor, const char* Direction)
           test(1);
         } else if (Direction == "back")
         {
-          test(2);
+          test(1);
         }
     } else if (Motor == "receiver")
     {
       if (Direction == "forward")
         {
-          test(3);
+          test(1);
         } else if (Direction == "back")
         {
-          test(4);
+          test(1);
         }
     }
   }
@@ -77,19 +85,19 @@ void GoOnSector(const char* Motor, const char* Direction)
     {
       if (Direction == "forward")
         {
-          test(5);
+          test(1);
         } else if (Direction == "back")
         {
-          test(6);
+          test(1);
         }
     } else if (Motor == "receiver")
     {
       if (Direction == "forward")
         {
-          test(7);
+          test(1);
         } else if (Direction == "back")
         {
-          test(8);
+          test(1);
         }
     }
   }
