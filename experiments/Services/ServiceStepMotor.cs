@@ -8,6 +8,16 @@ namespace experiments.Services
 {
     class ServiceStepMotor
     {
+        public static string TRANSMITTER_STEP_FORWARD = "1";
+        public static string TRANSMITTER_STEP_BACK = "2";
+        public static string RECEIVER_STEP_FORWARD = "3";
+        public static string RECEIVER_STEP_BACK = "4";
+        
+        public static string TRANSMITTER_SECTOR_FORWARD = "0";
+        public static string TRANSMITTER_SECTOR_BACK = "9";
+        public static string RECEIVER_SECTOR_FORWARD = "8";
+        public static string RECEIVER_SECTOR_BACK = "7";
+        
         private static SerialPort _comPort;
 
         private static string _selectedComPort;
@@ -48,44 +58,14 @@ namespace experiments.Services
             }
         }
 
-        public static void transmitterStepForward()
+        public static void stepMotorGo(string action)
         {
             if (!isConnectComPort())
             {
                 MessageBox.Show(_messageErrorNotConnectComPortText);
                 return;
             }
-            _comPort.Write("1");
-        }
-
-        public static void transmitterStepBack()
-        {
-            if (!isConnectComPort())
-            {
-                MessageBox.Show(_messageErrorNotConnectComPortText);
-                return;
-            }
-            _comPort.Write("2");
-        }
-
-        public static void receiverStepForward()
-        {
-            if (!isConnectComPort())
-            {
-                MessageBox.Show(_messageErrorNotConnectComPortText);
-                return;
-            }
-            _comPort.Write("3");
-        }
-
-        public static void receiverStepBack()
-        {
-            if (!isConnectComPort())
-            {
-                MessageBox.Show(_messageErrorNotConnectComPortText);
-                return;
-            }
-            _comPort.Write("4");
+            _comPort.Write(action);
         }
 
         public static bool isConnectComPort()

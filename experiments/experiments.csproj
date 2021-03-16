@@ -232,5 +232,8 @@
     <Content Include="lib\vscorelib_v4.dll" />
     <Content Include="lib\vslib3.dll" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="lib\Sketch for Arduino" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
