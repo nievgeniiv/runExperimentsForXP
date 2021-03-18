@@ -29,6 +29,8 @@ namespace experiments.Views
         public event EventHandler<EventArgs> transmitterSectorBack;
         public event EventHandler<EventArgs> receiverSectorForward;
         public event EventHandler<EventArgs> receiverSectorBack;
+        public event EventHandler<EventArgs> nextGroupStart;
+        public event EventHandler<EventArgs> previousGroupStart;
         public event EventHandler<EventArgs> compliteStepMotorSettings;
 
 
@@ -117,6 +119,16 @@ namespace experiments.Views
         private void ReceiverSectorBack_Click(object sender, EventArgs e)
         {
             receiverSectorBack(this, EventArgs.Empty);
+        }
+
+        private void nextGroup_Click(object sender, EventArgs e)
+        {
+            nextGroupStart(this, EventArgs.Empty);
+        }
+
+        private void previousGroup_Click(object sender, EventArgs e)
+        {
+            previousGroupStart(this, EventArgs.Empty);
         }
     }
 }

@@ -14,6 +14,8 @@ namespace experiments.Presents
 
         private string[] _listComPort;
         private string _selectedComPort;
+
+        private static int _position = 0;
         public PresentStepMotorSettings(IViewStepMotorSettings IView)
         {
             _IView = IView;
@@ -28,6 +30,8 @@ namespace experiments.Presents
             _IView.transmitterSectorBack += new EventHandler<EventArgs>(_transmitterSectorBack);
             _IView.receiverSectorForward += new EventHandler<EventArgs>(_receiverSectorForward);
             _IView.receiverSectorBack += new EventHandler<EventArgs>(_receiverSectorBack);
+            _IView.nextGroupStart += new EventHandler<EventArgs>(_nextGroup);
+            _IView.previousGroupStart += new EventHandler<EventArgs>(_previousGroup);
         }
 
         private void _getListComPort(object sender, EventArgs e)
@@ -89,6 +93,36 @@ namespace experiments.Presents
         private void _receiverSectorBack(object sender, EventArgs e)
         {
             ServiceStepMotor.stepMotorGo(ServiceStepMotor.RECEIVER_SECTOR_BACK);
+        }
+
+        private void _nextGroup(object sender, EventArgs e)
+        {
+            if (_position % 4 == 0)
+            {
+                ServiceStepMotor.stepMotorGo(ServiceStepMotor.TRANSMITTER_SECTOR_FORWARD);
+                ServiceStepMotor.stepMotorGo(ServiceStepMotor.RECEIVER_SECTOR_FORWARD);
+            }
+            else
+            {
+                ServiceStepMotor.stepMotorGo(ServiceStepMotor.TRANSMITTER_SECTOR_FORWARD);
+            }
+            
+            _position++;
+        }
+
+        private void _previousGroup(object sender, EventArgs e)
+        {
+            if (_position % 4 == 0)
+            {
+                ServiceStepMotor.stepMotorGo(ServiceStepMotor.TRANSMITTER_SECTOR_FORWARD);
+                ServiceStepMotor.stepMotorGo(ServiceStepMotor.RECEIVER_SECTOR_FORWARD);
+            }
+            else
+            {
+                ServiceStepMotor.stepMotorGo(ServiceStepMotor.TRANSMITTER_SECTOR_FORWARD);
+            }
+            
+            _position--;
         }
 
         private void _changeTextButton()

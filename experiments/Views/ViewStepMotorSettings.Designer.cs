@@ -42,6 +42,8 @@
             this.ReceiverStepBackButton = new System.Windows.Forms.Button();
             this.ReceiverStepForwardButton = new System.Windows.Forms.Button();
             this.CompliteStepMotorButton = new System.Windows.Forms.Button();
+            this.nextGroup = new System.Windows.Forms.Button();
+            this.previousGroup = new System.Windows.Forms.Button();
             this.TransmitterGroupBox.SuspendLayout();
             this.ReceiverGroupBox.SuspendLayout();
             this.SuspendLayout();
@@ -190,11 +192,33 @@
             this.CompliteStepMotorButton.UseVisualStyleBackColor = true;
             this.CompliteStepMotorButton.Click += new System.EventHandler(this.CompliteStepMotorButton_Click);
             // 
+            // nextGroup
+            // 
+            this.nextGroup.Location = new System.Drawing.Point(159, 318);
+            this.nextGroup.Name = "nextGroup";
+            this.nextGroup.Size = new System.Drawing.Size(125, 23);
+            this.nextGroup.TabIndex = 6;
+            this.nextGroup.Text = "Следующая группа";
+            this.nextGroup.UseVisualStyleBackColor = true;
+            this.nextGroup.Click += new System.EventHandler(this.nextGroup_Click);
+            // 
+            // previousGroup
+            // 
+            this.previousGroup.Location = new System.Drawing.Point(26, 318);
+            this.previousGroup.Name = "previousGroup";
+            this.previousGroup.Size = new System.Drawing.Size(119, 23);
+            this.previousGroup.TabIndex = 7;
+            this.previousGroup.Text = "Предыдущая группа";
+            this.previousGroup.UseVisualStyleBackColor = true;
+            this.previousGroup.Click += new System.EventHandler(this.previousGroup_Click);
+            // 
             // ViewStepMotorSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(508, 351);
+            this.Controls.Add(this.previousGroup);
+            this.Controls.Add(this.nextGroup);
             this.Controls.Add(this.CompliteStepMotorButton);
             this.Controls.Add(this.ReceiverGroupBox);
             this.Controls.Add(this.TransmitterGroupBox);
@@ -207,6 +231,10 @@
             this.ReceiverGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
         }
+
+        private System.Windows.Forms.Button previousGroup;
+
+        private System.Windows.Forms.Button nextGroup;
 
         private System.Windows.Forms.Button ReceiverSectorBack;
         private System.Windows.Forms.Button ReceiverSectorForward;

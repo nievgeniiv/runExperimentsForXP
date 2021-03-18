@@ -16,6 +16,8 @@ namespace experiments.InterfacesViews
         event EventHandler<EventArgs> transmitterSectorBack;
         event EventHandler<EventArgs> receiverSectorForward;
         event EventHandler<EventArgs> receiverSectorBack;
+        event EventHandler<EventArgs> nextGroupStart;
+        event EventHandler<EventArgs> previousGroupStart;
         event EventHandler<EventArgs> compliteStepMotorSettings;
 
         void setListComPort(string[] listComPort, string selectedComPort = null);
