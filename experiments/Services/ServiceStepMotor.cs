@@ -17,6 +17,8 @@ namespace experiments.Services
         public static string TRANSMITTER_SECTOR_BACK = "9";
         public static string RECEIVER_SECTOR_FORWARD = "8";
         public static string RECEIVER_SECTOR_BACK = "7";
+
+        private static bool IS_READY;
         
         private static SerialPort _comPort;
 
@@ -40,9 +42,17 @@ namespace experiments.Services
             {
                 _selectedComPort = nameComPort;
                 _comPort = new SerialPort(_selectedComPort, speedComPort, Parity.None, 8, StopBits.One);
+                _comPort.DtrEnable = true;
+                _comPort.DataReceived += checkReady;
                 _comPort.Open();
+                IS_READY = true;
             }
            
+        }
+
+        private static void checkReady(object sender, SerialDataReceivedEventArgs e)
+        {
+            IS_READY = _comPort.ReadExisting() == "en" || _comPort.ReadExisting() == "enen";
         }
 
         public static string getSelectedComPort()
@@ -65,7 +75,10 @@ namespace experiments.Services
                 MessageBox.Show(_messageErrorNotConnectComPortText);
                 return;
             }
+            
+            while (IS_READY == false) { }
             _comPort.Write(action);
+            IS_READY = false;
         }
 
         public static void stepMotorGoSerious()
@@ -78,14 +91,16 @@ namespace experiments.Services
             
             for (int i = 1; i <= 4; i++)
             {
+                while (IS_READY == false) { }
+                
                 _comPort.Write(TRANSMITTER_SECTOR_FORWARD);
-                System.Threading.Thread.Sleep(1000);
-                MessageBox.Show("Transmitter in Sector: " + i.ToString());
+                IS_READY = false;
+                while (IS_READY == false) { }
                 for (int j = 1; j <= 4; j++)
                 {
                     _comPort.Write(RECEIVER_SECTOR_FORWARD);
-                    System.Threading.Thread.Sleep(1000);
-                    MessageBox.Show("Receiver in Sector: " + j.ToString());
+                    IS_READY = false;
+                    while (IS_READY == false) { }
                 }
             }
         }

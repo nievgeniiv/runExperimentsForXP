@@ -194,7 +194,7 @@
             // 
             // nextGroup
             // 
-            this.nextGroup.Location = new System.Drawing.Point(159, 318);
+            this.nextGroup.Location = new System.Drawing.Point(159, 311);
             this.nextGroup.Name = "nextGroup";
             this.nextGroup.Size = new System.Drawing.Size(125, 23);
             this.nextGroup.TabIndex = 6;
@@ -204,7 +204,7 @@
             // 
             // previousGroup
             // 
-            this.previousGroup.Location = new System.Drawing.Point(26, 318);
+            this.previousGroup.Location = new System.Drawing.Point(26, 311);
             this.previousGroup.Name = "previousGroup";
             this.previousGroup.Size = new System.Drawing.Size(119, 23);
             this.previousGroup.TabIndex = 7;

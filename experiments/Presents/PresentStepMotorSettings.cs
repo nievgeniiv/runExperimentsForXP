@@ -108,6 +108,10 @@ namespace experiments.Presents
             }
             
             _position++;
+            if (_position == 16)
+            {
+                _position = 0;
+            }
         }
 
         private void _previousGroup(object sender, EventArgs e)
@@ -123,6 +127,10 @@ namespace experiments.Presents
             }
             
             _position--;
+            if (_position == 0)
+            {
+                _position = 16;
+            }
         }
 
         private void _changeTextButton()
