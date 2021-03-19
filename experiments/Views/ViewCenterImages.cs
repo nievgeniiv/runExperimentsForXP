@@ -14,6 +14,7 @@ namespace experiments.Views
         
         private string _pathDirectory;
         private int[] _centerPxl = new int[2];
+        private bool _turnOnStaticProcessingAndError = false;
         
         public ViewCenterImages()
         {
@@ -25,6 +26,8 @@ namespace experiments.Views
         {
             _centerPxl[0] = Convert.ToInt32(textBox1.Text);
             _centerPxl[1] = Convert.ToInt32(textBox2.Text);
+            _turnOnStaticProcessingAndError = TurnOnStaticProcessingAndError.Checked;
+            
             using(var fbd = new FolderBrowserDialog())
             {
                 DialogResult result = fbd.ShowDialog();
@@ -36,7 +39,6 @@ namespace experiments.Views
                     
                 }
             }
-            //openDirectory(this, EventArgs.Empty);
             MessageBox.Show("Digilization is complite");
         }
 

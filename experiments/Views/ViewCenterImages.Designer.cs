@@ -37,6 +37,7 @@ namespace experiments.Views
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.TurnOnStaticProcessingAndError = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -49,7 +50,7 @@ namespace experiments.Views
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(194, 37);
+            this.label2.Location = new System.Drawing.Point(194, 62);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 23);
             this.label2.TabIndex = 1;
@@ -57,7 +58,7 @@ namespace experiments.Views
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(29, 37);
+            this.label3.Location = new System.Drawing.Point(29, 62);
             this.label3.Name = "label3";
             this.label3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label3.Size = new System.Drawing.Size(55, 23);
@@ -66,21 +67,21 @@ namespace experiments.Views
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(162, 63);
+            this.textBox1.Location = new System.Drawing.Point(162, 88);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 20);
             this.textBox1.TabIndex = 3;
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(12, 63);
+            this.textBox2.Location = new System.Drawing.Point(12, 88);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(100, 20);
             this.textBox2.TabIndex = 4;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(95, 89);
+            this.button1.Location = new System.Drawing.Point(95, 114);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 5;
@@ -88,11 +89,21 @@ namespace experiments.Views
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // TurnOnStaticProcessingAndError
+            // 
+            this.TurnOnStaticProcessingAndError.Location = new System.Drawing.Point(28, 29);
+            this.TurnOnStaticProcessingAndError.Name = "TurnOnStaticProcessingAndError";
+            this.TurnOnStaticProcessingAndError.Size = new System.Drawing.Size(234, 24);
+            this.TurnOnStaticProcessingAndError.TabIndex = 6;
+            this.TurnOnStaticProcessingAndError.Text = "Вкл. статистическую обработку данных";
+            this.TurnOnStaticProcessingAndError.UseVisualStyleBackColor = true;
+            // 
             // ViewCenterImages
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(274, 124);
+            this.ClientSize = new System.Drawing.Size(274, 143);
+            this.Controls.Add(this.TurnOnStaticProcessingAndError);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
@@ -104,6 +115,8 @@ namespace experiments.Views
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.CheckBox TurnOnStaticProcessingAndError;
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label2;
