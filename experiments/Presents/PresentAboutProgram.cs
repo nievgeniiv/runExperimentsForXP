@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using experiments.InterfacesViews;
+﻿using experiments.InterfacesViews;
 using experiments.Models;
 
 namespace experiments.Presents

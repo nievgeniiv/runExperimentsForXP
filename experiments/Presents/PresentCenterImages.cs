@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using experiments.InterfacesViews;
 
 namespace experiments.Presents
