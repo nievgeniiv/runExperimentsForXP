@@ -35,11 +35,6 @@ namespace experiments.Presents
                 }
                 _newPath = String.Concat(_newPath,  v + '\\');
             }
-            DirectoryInfo dirInfo = new DirectoryInfo(_newPath + "Digitization");
-            if (!dirInfo.Exists)
-            {
-                dirInfo.Create();
-            }
 
             _centerPxl = _IView.getCenterPxl();
             Services.ServiceDigitizationBMP.run(_newPath, _centerPxl);
