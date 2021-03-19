@@ -58,5 +58,10 @@ namespace experiments.Views
         {
             return _centerPxl;
         }
+
+        public bool getTurnOnStaticProcessingAndError()
+        {
+            return _turnOnStaticProcessingAndError;
+        }
     }
 }
