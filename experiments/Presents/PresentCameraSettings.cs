@@ -13,6 +13,8 @@ namespace experiments.Presents
         private ModelSettings _modelSettings = new ModelSettings();
 
         private int _countPhoto;
+        private string _mode;
+        private ServiceCCDCamera _serviceCCDCamera;
 
         public PresentCameraSettings(IViewCameraSettings IView)
         {
@@ -25,8 +27,16 @@ namespace experiments.Presents
         private void setCameraSettings(object sender, EventArgs e)
         {
             _countPhoto = _IView.getCountPhoto();
+            _mode = _IView.getMode();
             _modelSettings.setCountPhoto(_countPhoto);
-            ServiceCCDCamera _serviceCCDCamera = new ServiceCCDCamera();
+            _serviceCCDCamera = new ServiceCCDCamera("hand");
+        }
+
+        private void getPhoto()
+        {
+            _serviceCCDCamera.makePhoto(_countPhoto);
+            
+            // TODO: Копирование файлов из tmp в нужное место, оцифровка файлов, сохранение оцифрованных файлов
         }
     }
 }

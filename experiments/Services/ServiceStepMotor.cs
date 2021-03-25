@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.IO.Ports;
+﻿using System.IO.Ports;
 using System.Windows.Forms;
 
 namespace experiments.Services
 {
     class ServiceStepMotor
     {
-        private static SerialPort _comPort;
+        public static SerialPort _comPort;
 
         private static string _selectedComPort;
         private static string _messageErrorNotConnectComPortText = "Нет соединения с COM-портом";

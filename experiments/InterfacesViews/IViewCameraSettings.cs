@@ -10,5 +10,7 @@ namespace experiments.InterfacesViews
 
         int getCountPhoto();
         void setCountPhoto(int countPhoto);
+
+        string getMode();
     }
 }

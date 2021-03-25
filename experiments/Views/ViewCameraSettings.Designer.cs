@@ -31,11 +31,12 @@
             this.SaveCameraSettingsButton = new System.Windows.Forms.Button();
             this.CountPhotoLabel = new System.Windows.Forms.Label();
             this.CountPhotoTextBox = new System.Windows.Forms.TextBox();
+            this.modeHand = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // SaveCameraSettingsButton
             // 
-            this.SaveCameraSettingsButton.Location = new System.Drawing.Point(183, 52);
+            this.SaveCameraSettingsButton.Location = new System.Drawing.Point(183, 78);
             this.SaveCameraSettingsButton.Name = "SaveCameraSettingsButton";
             this.SaveCameraSettingsButton.Size = new System.Drawing.Size(75, 23);
             this.SaveCameraSettingsButton.TabIndex = 0;
@@ -59,11 +60,21 @@
             this.CountPhotoTextBox.Size = new System.Drawing.Size(100, 20);
             this.CountPhotoTextBox.TabIndex = 2;
             // 
+            // modeHand
+            // 
+            this.modeHand.Location = new System.Drawing.Point(12, 53);
+            this.modeHand.Name = "modeHand";
+            this.modeHand.Size = new System.Drawing.Size(227, 24);
+            this.modeHand.TabIndex = 3;
+            this.modeHand.Text = "Режим внешней синхронизации";
+            this.modeHand.UseVisualStyleBackColor = true;
+            // 
             // ViewCameraSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(269, 87);
+            this.ClientSize = new System.Drawing.Size(269, 113);
+            this.Controls.Add(this.modeHand);
             this.Controls.Add(this.CountPhotoTextBox);
             this.Controls.Add(this.CountPhotoLabel);
             this.Controls.Add(this.SaveCameraSettingsButton);
@@ -71,8 +82,9 @@
             this.Text = "Camera Settings";
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
+
+        private System.Windows.Forms.CheckBox modeHand;
 
         #endregion
 

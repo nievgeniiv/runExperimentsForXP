@@ -13,6 +13,7 @@ namespace experiments.Views
     {
 
         public int countPhoto { get; set; }
+        public string mode { get; set; }
 
         public ViewCameraSettings()
         {
@@ -35,8 +36,21 @@ namespace experiments.Views
         private void SaveCameraSettingsButton_Click(object sender, EventArgs e)
         {
             countPhoto = Convert.ToInt32(CountPhotoTextBox.Text);
+            if (modeHand.Checked)
+            {
+                mode = "hand";
+            }
+            else
+            {
+                mode = "auto";
+            }
             setSettings(this, EventArgs.Empty);
             Close();
+        }
+
+        public string getMode()
+        {
+            return mode;
         }
     }
 }

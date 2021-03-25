@@ -4,6 +4,7 @@ using System.Text;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.CodeDom;
+using System.IO.Ports;
 
 namespace experiments.Services
 {
@@ -67,18 +68,28 @@ namespace experiments.Services
         static extern short Create();
         
         #endregion
-        
 
-        public ServiceCCDCamera()
+        private string _mode;
+
+        public ServiceCCDCamera(string mode)
         {
-            var pEnv = GetEnvironment();
-            MessageBox.Show(pEnv.ToString());
-            //var k = GetSettings();
-            //MessageBox.Show(k.ToString());
-            var devices = GetDevicePrototypes();
-            var device = GetCurrent();
-            GetDeviceCreator(device);
-            Create();
+            // var pEnv = GetEnvironment();
+            // MessageBox.Show(pEnv.ToString());
+            // //var k = GetSettings();
+            // //MessageBox.Show(k.ToString());
+            // var devices = GetDevicePrototypes();
+            // var device = GetCurrent();
+            // GetDeviceCreator(device);
+            // Create();
+            _mode = mode;
+        }
+
+        public void makePhoto(int countPhoto)
+        {
+            if (_mode == "hand")
+            {
+                ServiceStepMotor._comPort.Write("photo_" + countPhoto.ToString());
+            }
         }
     }
 }
