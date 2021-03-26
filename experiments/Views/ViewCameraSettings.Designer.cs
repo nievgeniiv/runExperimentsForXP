@@ -32,6 +32,7 @@
             this.CountPhotoLabel = new System.Windows.Forms.Label();
             this.CountPhotoTextBox = new System.Windows.Forms.TextBox();
             this.modeHand = new System.Windows.Forms.CheckBox();
+            this.getPhoto = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // SaveCameraSettingsButton
@@ -69,11 +70,22 @@
             this.modeHand.Text = "Режим внешней синхронизации";
             this.modeHand.UseVisualStyleBackColor = true;
             // 
+            // getPhoto
+            // 
+            this.getPhoto.Location = new System.Drawing.Point(79, 78);
+            this.getPhoto.Name = "getPhoto";
+            this.getPhoto.Size = new System.Drawing.Size(75, 23);
+            this.getPhoto.TabIndex = 4;
+            this.getPhoto.Text = "Фото";
+            this.getPhoto.UseVisualStyleBackColor = true;
+            this.getPhoto.Click += new System.EventHandler(this.getPhoto_Click);
+            // 
             // ViewCameraSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(269, 113);
+            this.Controls.Add(this.getPhoto);
             this.Controls.Add(this.modeHand);
             this.Controls.Add(this.CountPhotoTextBox);
             this.Controls.Add(this.CountPhotoLabel);
@@ -83,6 +95,8 @@
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.Button getPhoto;
 
         private System.Windows.Forms.CheckBox modeHand;
 

@@ -233,7 +233,7 @@
     <Content Include="lib\vslib3.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="testsData\tmp" />
+    <Folder Include="bin\Debug\testsData\Results" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

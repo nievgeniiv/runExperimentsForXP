@@ -18,9 +18,11 @@ namespace experiments.Views
         public ViewCameraSettings()
         {
             InitializeComponent();
+            mode = "auto";
         }
 
         public event EventHandler<EventArgs> setSettings;
+        public event EventHandler<EventArgs> getPhotos;
 
         public void setCountPhoto(int countPhoto)
         {
@@ -45,12 +47,17 @@ namespace experiments.Views
                 mode = "auto";
             }
             setSettings(this, EventArgs.Empty);
-            Close();
+            //Close();
         }
 
         public string getMode()
         {
             return mode;
+        }
+
+        private void getPhoto_Click(object sender, EventArgs e)
+        {
+            getPhotos(this, EventArgs.Empty);
         }
     }
 }

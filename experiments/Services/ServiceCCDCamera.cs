@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.CodeDom;
 using System.IO.Ports;
+using experiments.Models;
 
 namespace experiments.Services
 {
@@ -88,7 +89,7 @@ namespace experiments.Services
         {
             if (_mode == "hand")
             {
-                ServiceStepMotor._comPort.Write("photo_" + countPhoto.ToString());
+                //ServiceStepMotor._comPort.Write("photo_" + countPhoto.ToString());
             }
         }
     }
