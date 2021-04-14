@@ -32,12 +32,18 @@
             this.ListComPortsComboBox = new System.Windows.Forms.ComboBox();
             this.ConnectAndDisconnectComPortButton1 = new System.Windows.Forms.Button();
             this.TransmitterGroupBox = new System.Windows.Forms.GroupBox();
+            this.TransmitterSectorBack = new System.Windows.Forms.Button();
+            this.TransmitterSectorForward = new System.Windows.Forms.Button();
             this.TransmitterStepBackButton1 = new System.Windows.Forms.Button();
             this.TransmitterStepForwardButton = new System.Windows.Forms.Button();
             this.ReceiverGroupBox = new System.Windows.Forms.GroupBox();
+            this.ReceiverSectorBack = new System.Windows.Forms.Button();
+            this.ReceiverSectorForward = new System.Windows.Forms.Button();
             this.ReceiverStepBackButton = new System.Windows.Forms.Button();
             this.ReceiverStepForwardButton = new System.Windows.Forms.Button();
             this.CompliteStepMotorButton = new System.Windows.Forms.Button();
+            this.nextGroup = new System.Windows.Forms.Button();
+            this.previousGroup = new System.Windows.Forms.Button();
             this.TransmitterGroupBox.SuspendLayout();
             this.ReceiverGroupBox.SuspendLayout();
             this.SuspendLayout();
@@ -72,6 +78,8 @@
             // 
             // TransmitterGroupBox
             // 
+            this.TransmitterGroupBox.Controls.Add(this.TransmitterSectorBack);
+            this.TransmitterGroupBox.Controls.Add(this.TransmitterSectorForward);
             this.TransmitterGroupBox.Controls.Add(this.TransmitterStepBackButton1);
             this.TransmitterGroupBox.Controls.Add(this.TransmitterStepForwardButton);
             this.TransmitterGroupBox.Location = new System.Drawing.Point(24, 152);
@@ -80,6 +88,26 @@
             this.TransmitterGroupBox.TabIndex = 3;
             this.TransmitterGroupBox.TabStop = false;
             this.TransmitterGroupBox.Text = "Передатчик";
+            // 
+            // TransmitterSectorBack
+            // 
+            this.TransmitterSectorBack.Location = new System.Drawing.Point(63, 92);
+            this.TransmitterSectorBack.Name = "TransmitterSectorBack";
+            this.TransmitterSectorBack.Size = new System.Drawing.Size(101, 23);
+            this.TransmitterSectorBack.TabIndex = 3;
+            this.TransmitterSectorBack.Text = "Сектор назад";
+            this.TransmitterSectorBack.UseVisualStyleBackColor = true;
+            this.TransmitterSectorBack.Click += new System.EventHandler(this.TransmitterSectorBack_Click);
+            // 
+            // TransmitterSectorForward
+            // 
+            this.TransmitterSectorForward.Location = new System.Drawing.Point(63, 34);
+            this.TransmitterSectorForward.Name = "TransmitterSectorForward";
+            this.TransmitterSectorForward.Size = new System.Drawing.Size(101, 23);
+            this.TransmitterSectorForward.TabIndex = 2;
+            this.TransmitterSectorForward.Text = "Сектор вперед";
+            this.TransmitterSectorForward.UseVisualStyleBackColor = true;
+            this.TransmitterSectorForward.Click += new System.EventHandler(this.TransmitterSectorForward_Click);
             // 
             // TransmitterStepBackButton1
             // 
@@ -103,6 +131,8 @@
             // 
             // ReceiverGroupBox
             // 
+            this.ReceiverGroupBox.Controls.Add(this.ReceiverSectorBack);
+            this.ReceiverGroupBox.Controls.Add(this.ReceiverSectorForward);
             this.ReceiverGroupBox.Controls.Add(this.ReceiverStepBackButton);
             this.ReceiverGroupBox.Controls.Add(this.ReceiverStepForwardButton);
             this.ReceiverGroupBox.Location = new System.Drawing.Point(267, 152);
@@ -111,6 +141,26 @@
             this.ReceiverGroupBox.TabIndex = 4;
             this.ReceiverGroupBox.TabStop = false;
             this.ReceiverGroupBox.Text = "Приемник";
+            // 
+            // ReceiverSectorBack
+            // 
+            this.ReceiverSectorBack.Location = new System.Drawing.Point(65, 92);
+            this.ReceiverSectorBack.Name = "ReceiverSectorBack";
+            this.ReceiverSectorBack.Size = new System.Drawing.Size(104, 23);
+            this.ReceiverSectorBack.TabIndex = 5;
+            this.ReceiverSectorBack.Text = "Сектор назад";
+            this.ReceiverSectorBack.UseVisualStyleBackColor = true;
+            this.ReceiverSectorBack.Click += new System.EventHandler(this.ReceiverSectorBack_Click);
+            // 
+            // ReceiverSectorForward
+            // 
+            this.ReceiverSectorForward.Location = new System.Drawing.Point(65, 34);
+            this.ReceiverSectorForward.Name = "ReceiverSectorForward";
+            this.ReceiverSectorForward.Size = new System.Drawing.Size(104, 23);
+            this.ReceiverSectorForward.TabIndex = 4;
+            this.ReceiverSectorForward.Text = "Сектор вперед";
+            this.ReceiverSectorForward.UseVisualStyleBackColor = true;
+            this.ReceiverSectorForward.Click += new System.EventHandler(this.ReceiverSectorForward_Click);
             // 
             // ReceiverStepBackButton
             // 
@@ -142,11 +192,33 @@
             this.CompliteStepMotorButton.UseVisualStyleBackColor = true;
             this.CompliteStepMotorButton.Click += new System.EventHandler(this.CompliteStepMotorButton_Click);
             // 
+            // nextGroup
+            // 
+            this.nextGroup.Location = new System.Drawing.Point(159, 311);
+            this.nextGroup.Name = "nextGroup";
+            this.nextGroup.Size = new System.Drawing.Size(125, 23);
+            this.nextGroup.TabIndex = 6;
+            this.nextGroup.Text = "Следующая группа";
+            this.nextGroup.UseVisualStyleBackColor = true;
+            this.nextGroup.Click += new System.EventHandler(this.nextGroup_Click);
+            // 
+            // previousGroup
+            // 
+            this.previousGroup.Location = new System.Drawing.Point(26, 311);
+            this.previousGroup.Name = "previousGroup";
+            this.previousGroup.Size = new System.Drawing.Size(119, 23);
+            this.previousGroup.TabIndex = 7;
+            this.previousGroup.Text = "Предыдущая группа";
+            this.previousGroup.UseVisualStyleBackColor = true;
+            this.previousGroup.Click += new System.EventHandler(this.previousGroup_Click);
+            // 
             // ViewStepMotorSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(508, 351);
+            this.Controls.Add(this.previousGroup);
+            this.Controls.Add(this.nextGroup);
             this.Controls.Add(this.CompliteStepMotorButton);
             this.Controls.Add(this.ReceiverGroupBox);
             this.Controls.Add(this.TransmitterGroupBox);
@@ -158,8 +230,17 @@
             this.TransmitterGroupBox.ResumeLayout(false);
             this.ReceiverGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
-
         }
+
+        private System.Windows.Forms.Button previousGroup;
+
+        private System.Windows.Forms.Button nextGroup;
+
+        private System.Windows.Forms.Button ReceiverSectorBack;
+        private System.Windows.Forms.Button ReceiverSectorForward;
+        private System.Windows.Forms.Button TransmitterSectorBack;
+
+        private System.Windows.Forms.Button TransmitterSectorForward;
 
         #endregion
 
