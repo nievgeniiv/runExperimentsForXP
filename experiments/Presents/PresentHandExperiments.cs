@@ -13,6 +13,7 @@ namespace experiments.Presents
         private IViewHandExperiments _IView;
         private ModelSettings _modelSettings = new ModelSettings();
         private static int _position = 0;
+        private int[] _center = new int[2];
 
         private ServiceCCDCamera _serviceCCDCamera;
         private readonly int _countPhoto;
@@ -89,22 +90,68 @@ namespace experiments.Presents
         
         private void _takePhoto(object sender, EventArgs e)
         {
+            _center = _IView.getCenter();
             _serviceCCDCamera.makePhoto(_countPhoto);
 
+            var nameDir = _getNameDir();
             string path = Directory.GetCurrentDirectory();
             string[] files = Directory.GetFiles(path + "/testsData/tmp/");
             string date = DateTime.Now.ToString("dd.MM.yyyy");
 
             if (!Directory.Exists(path + "/testsData/Results/" + date))
             {
-                Directory.CreateDirectory(path + "/testsData/Results/" + date + "/Original");
+                Directory.CreateDirectory(path + "/testsData/Results/" + date + "/Original/" + nameDir);
             }
 
+            string newPath = "";
             foreach (var file in files)
             {
-                string newPath = file.Replace("tmp", "Results/" + date + "/Original/");
+                newPath = file.Replace("tmp", "Results/" + date + "/Original/"+ nameDir + "/");
                 File.Move(file, newPath);
             }
+            
+            ServiceDigitizationBMP.run(newPath, _center);
+        }
+
+        private string _getNameDir()
+        {
+            switch (_position)
+            {
+                case 1:
+                    return "0_0";
+                case 2:
+                    return "45_0";
+                case 3:
+                    return "90_0";
+                case 4:
+                    return "ц_0";
+                case 5:
+                    return "0_45";
+                case 6:
+                    return "45_45";
+                case 7:
+                    return "90_45";
+                case 8:
+                    return "ц_45";
+                case 9:
+                    return "0_90";
+                case 10:
+                    return "45_90";
+                case 11:
+                    return "90_90";
+                case 12:
+                    return "ц_90";
+                case 13:
+                    return "0_ц";
+                case 14:
+                    return "45_ц";
+                case 15:
+                    return "90_ц";
+                case 16:
+                    return "ц_ц";
+            }
+
+            return "";
         }
 
     }

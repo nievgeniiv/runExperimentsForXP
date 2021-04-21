@@ -10,12 +10,10 @@ namespace experiments.Services
 
         private static readonly ModelBMP _modelBMP = new ModelBMP();
         private static readonly ModelDirectory _modelDirectory = new ModelDirectory();
-        private static int[] _centerPxl = new int[2];
 
         public static void run(string path, int[] centerPxl)
         {
-            _centerPxl = centerPxl;
-
+            _modelBMP.centerPxl = centerPxl;
             _modelDirectory.MakeTreeDirectories(path);
             foreach (var pathToDir in _modelDirectory.pathForDir)
             {
@@ -38,7 +36,6 @@ namespace experiments.Services
                     i++;
                 }
                 
-                _modelBMP.centerPxl = _centerPxl;
                 var pathSave = pathToDir.Replace("Original", "Digitization");
                 _modelBMP.saveArrayIntInFile(pathSave.TrimEnd('m', 'k', 's') + "Line");
             }

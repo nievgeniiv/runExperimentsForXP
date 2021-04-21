@@ -38,11 +38,15 @@ namespace experiments.Views
             this.nextElementReceiver = new System.Windows.Forms.Button();
             this.prevElementReceiver = new System.Windows.Forms.Button();
             this.takePhoto = new System.Windows.Forms.Button();
+            this.CenterX = new System.Windows.Forms.TextBox();
+            this.LableForCenterX = new System.Windows.Forms.Label();
+            this.LableForCenterY = new System.Windows.Forms.Label();
+            this.CenterY = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // nextCombination
             // 
-            this.nextCombination.Location = new System.Drawing.Point(73, 62);
+            this.nextCombination.Location = new System.Drawing.Point(73, 93);
             this.nextCombination.Name = "nextCombination";
             this.nextCombination.Size = new System.Drawing.Size(154, 23);
             this.nextCombination.TabIndex = 0;
@@ -52,7 +56,7 @@ namespace experiments.Views
             // 
             // prevCombination
             // 
-            this.prevCombination.Location = new System.Drawing.Point(73, 107);
+            this.prevCombination.Location = new System.Drawing.Point(73, 138);
             this.prevCombination.Name = "prevCombination";
             this.prevCombination.Size = new System.Drawing.Size(154, 23);
             this.prevCombination.TabIndex = 1;
@@ -62,7 +66,7 @@ namespace experiments.Views
             // 
             // nextElementTransmitter
             // 
-            this.nextElementTransmitter.Location = new System.Drawing.Point(265, 62);
+            this.nextElementTransmitter.Location = new System.Drawing.Point(265, 93);
             this.nextElementTransmitter.Name = "nextElementTransmitter";
             this.nextElementTransmitter.Size = new System.Drawing.Size(198, 23);
             this.nextElementTransmitter.TabIndex = 2;
@@ -72,7 +76,7 @@ namespace experiments.Views
             // 
             // prevElementTransmitter
             // 
-            this.prevElementTransmitter.Location = new System.Drawing.Point(265, 107);
+            this.prevElementTransmitter.Location = new System.Drawing.Point(265, 138);
             this.prevElementTransmitter.Name = "prevElementTransmitter";
             this.prevElementTransmitter.Size = new System.Drawing.Size(208, 23);
             this.prevElementTransmitter.TabIndex = 3;
@@ -82,7 +86,7 @@ namespace experiments.Views
             // 
             // nextElementReceiver
             // 
-            this.nextElementReceiver.Location = new System.Drawing.Point(497, 62);
+            this.nextElementReceiver.Location = new System.Drawing.Point(497, 93);
             this.nextElementReceiver.Name = "nextElementReceiver";
             this.nextElementReceiver.Size = new System.Drawing.Size(208, 23);
             this.nextElementReceiver.TabIndex = 4;
@@ -92,7 +96,7 @@ namespace experiments.Views
             // 
             // prevElementReceiver
             // 
-            this.prevElementReceiver.Location = new System.Drawing.Point(497, 107);
+            this.prevElementReceiver.Location = new System.Drawing.Point(497, 138);
             this.prevElementReceiver.Name = "prevElementReceiver";
             this.prevElementReceiver.Size = new System.Drawing.Size(208, 23);
             this.prevElementReceiver.TabIndex = 5;
@@ -102,7 +106,7 @@ namespace experiments.Views
             // 
             // takePhoto
             // 
-            this.takePhoto.Location = new System.Drawing.Point(310, 170);
+            this.takePhoto.Location = new System.Drawing.Point(310, 201);
             this.takePhoto.Name = "takePhoto";
             this.takePhoto.Size = new System.Drawing.Size(153, 23);
             this.takePhoto.TabIndex = 6;
@@ -110,11 +114,47 @@ namespace experiments.Views
             this.takePhoto.UseVisualStyleBackColor = true;
             this.takePhoto.Click += new System.EventHandler(this.takePhoto_Click);
             // 
+            // CenterX
+            // 
+            this.CenterX.Location = new System.Drawing.Point(184, 57);
+            this.CenterX.Name = "CenterX";
+            this.CenterX.Size = new System.Drawing.Size(90, 20);
+            this.CenterX.TabIndex = 7;
+            this.CenterX.Text = "0";
+            // 
+            // LableForCenterX
+            // 
+            this.LableForCenterX.Location = new System.Drawing.Point(222, 32);
+            this.LableForCenterX.Name = "LableForCenterX";
+            this.LableForCenterX.Size = new System.Drawing.Size(14, 13);
+            this.LableForCenterX.TabIndex = 8;
+            this.LableForCenterX.Text = "Х";
+            // 
+            // LableForCenterY
+            // 
+            this.LableForCenterY.Location = new System.Drawing.Point(391, 32);
+            this.LableForCenterY.Name = "LableForCenterY";
+            this.LableForCenterY.Size = new System.Drawing.Size(14, 13);
+            this.LableForCenterY.TabIndex = 10;
+            this.LableForCenterY.Text = "Y";
+            // 
+            // CenterY
+            // 
+            this.CenterY.Location = new System.Drawing.Point(353, 57);
+            this.CenterY.Name = "CenterY";
+            this.CenterY.Size = new System.Drawing.Size(90, 20);
+            this.CenterY.TabIndex = 9;
+            this.CenterY.Text = "0";
+            // 
             // ViewHandExperiments
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 231);
+            this.ClientSize = new System.Drawing.Size(800, 298);
+            this.Controls.Add(this.LableForCenterY);
+            this.Controls.Add(this.CenterY);
+            this.Controls.Add(this.LableForCenterX);
+            this.Controls.Add(this.CenterX);
             this.Controls.Add(this.takePhoto);
             this.Controls.Add(this.prevElementReceiver);
             this.Controls.Add(this.nextElementReceiver);
@@ -125,7 +165,13 @@ namespace experiments.Views
             this.Name = "ViewHandExperiments";
             this.Text = "ViewHandExperiments";
             this.ResumeLayout(false);
+            this.PerformLayout();
         }
+
+        private System.Windows.Forms.TextBox CenterX;
+        private System.Windows.Forms.Label LableForCenterX;
+        private System.Windows.Forms.Label LableForCenterY;
+        private System.Windows.Forms.TextBox CenterY;
 
         private System.Windows.Forms.Button takePhoto;
 

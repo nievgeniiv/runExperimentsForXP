@@ -6,6 +6,8 @@ namespace experiments.Views
 {
     public partial class ViewHandExperiments : Form, IViewHandExperiments
     {
+        private int[] _center = new int[2];
+
         public ViewHandExperiments()
         {
             InitializeComponent();
@@ -51,7 +53,14 @@ namespace experiments.Views
 
         private void takePhoto_Click(object sender, EventArgs e)
         {
+            _center[0] = Int32.Parse(CenterX.Text);
+            _center[1] = Int32.Parse(CenterY.Text);
             takePhotoWithCCD(this, EventArgs.Empty);
+        }
+
+        public int[] getCenter()
+        {
+            return _center;
         }
     }
 }

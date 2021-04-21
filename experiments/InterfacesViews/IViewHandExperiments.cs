@@ -11,5 +11,6 @@ namespace experiments.InterfacesViews
         event EventHandler<EventArgs> nextPolarizationElementsInReceiver;
         event EventHandler<EventArgs> prevPolarizationElementsInReceiver;
         event EventHandler<EventArgs> takePhotoWithCCD;
+        int[] getCenter();
     }
 }
