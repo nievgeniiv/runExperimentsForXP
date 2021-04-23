@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Windows.Forms;
 using experiments.InterfacesViews;
 using experiments.Models;
 using experiments.Services;
@@ -91,14 +92,15 @@ namespace experiments.Presents
         private void _takePhoto(object sender, EventArgs e)
         {
             _center = _IView.getCenter();
+            _serviceCCDCamera = new ServiceCCDCamera("hand");
             _serviceCCDCamera.makePhoto(_countPhoto);
-
+            //_position = 1;
             var nameDir = _getNameDir();
             string path = Directory.GetCurrentDirectory();
             string[] files = Directory.GetFiles(path + "/testsData/tmp/");
             string date = DateTime.Now.ToString("dd.MM.yyyy");
 
-            if (!Directory.Exists(path + "/testsData/Results/" + date))
+            if (!Directory.Exists(path + "/testsData/Results/" + date + "/Original/" + nameDir))
             {
                 Directory.CreateDirectory(path + "/testsData/Results/" + date + "/Original/" + nameDir);
             }
@@ -107,6 +109,7 @@ namespace experiments.Presents
             foreach (var file in files)
             {
                 newPath = file.Replace("tmp", "Results/" + date + "/Original/"+ nameDir + "/");
+                MessageBox.Show(newPath);
                 File.Move(file, newPath);
             }
             

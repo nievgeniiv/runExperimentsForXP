@@ -124,5 +124,12 @@ namespace experiments
             PresentCenterImages present = new PresentCenterImages(view);
             view.Show();
         }
+
+        private void ручноеУправлениеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ViewHandExperiments view = new ViewHandExperiments();
+            PresentHandExperiments present = new PresentHandExperiments(view);
+            view.Show();
+        }
     }
 }

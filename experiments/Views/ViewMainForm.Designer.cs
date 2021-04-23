@@ -45,12 +45,13 @@
             this.BackTypeExperimentsButton = new System.Windows.Forms.Button();
             this.RunExperimentsButton = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.ручноеУправлениеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.FileToolStripMenuItem, this.SettingsToolStripMenuItem, this.AboutProgramToolStripMenuItem});
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.FileToolStripMenuItem, this.SettingsToolStripMenuItem, this.AboutProgramToolStripMenuItem, this.ручноеУправлениеToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(954, 24);
@@ -176,6 +177,13 @@
             this.RunExperimentsButton.UseVisualStyleBackColor = true;
             this.RunExperimentsButton.Click += new System.EventHandler(this.RunExperimentsButton_Click);
             // 
+            // ручноеУправлениеToolStripMenuItem
+            // 
+            this.ручноеУправлениеToolStripMenuItem.Name = "ручноеУправлениеToolStripMenuItem";
+            this.ручноеУправлениеToolStripMenuItem.Size = new System.Drawing.Size(127, 20);
+            this.ручноеУправлениеToolStripMenuItem.Text = "Ручное управление";
+            this.ручноеУправлениеToolStripMenuItem.Click += new System.EventHandler(this.ручноеУправлениеToolStripMenuItem_Click);
+            // 
             // ViewMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -196,6 +204,8 @@
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.ToolStripMenuItem ручноеУправлениеToolStripMenuItem;
 
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
 
