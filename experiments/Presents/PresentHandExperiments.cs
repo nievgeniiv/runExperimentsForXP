@@ -109,11 +109,10 @@ namespace experiments.Presents
             foreach (var file in files)
             {
                 newPath = file.Replace("tmp", "Results/" + date + "/Original/"+ nameDir + "/");
-                MessageBox.Show(newPath);
                 File.Move(file, newPath);
             }
             
-            ServiceDigitizationBMP.run(newPath, _center);
+            ServiceDigitizationBMP.run(path + "/testsData/Results/" + date + "/Original/" + nameDir + "/", _center);
         }
 
         private string _getNameDir()

@@ -39,7 +39,6 @@ namespace experiments.Models
         public void MakeTreeDirectories(string path)
         {
             DirectoryInfo dirInfo = new DirectoryInfo(path);
-            int dirCount = dirInfo.GetDirectories().Length;
             int filesCount = dirInfo.GetFiles().Length;
             
             if (filesCount > 0)
@@ -48,6 +47,7 @@ namespace experiments.Models
                 pathForDir.Add(path);
             }
             
+            int dirCount = dirInfo.GetDirectories().Length;
             if (dirCount > 0)
             {
                 Regex regex = new Regex(_nameDirDigitization);
